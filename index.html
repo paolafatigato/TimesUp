@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,263 +8,299 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg:     #16302a;
-  --bg2:    #0e2218;
-  --felt:   #1d4a3a;
-  --gold:   #d4a84b;
-  --gold-l: #f0c870;
-  --cream:  #faf4e1;
-  --cream-d:#ede3c2;
-  --dark:   #1a1a1a;
-  --light:  #faf4e1;
-  --t1: #c0392b; --t2: #2471a3; --t3: #6c3483;
-  --ok: #27ae60; --ko: #c0392b;
-  --r: 14px;
-  --sh: 0 8px 32px rgba(0,0,0,0.5);
-  --sh-card: 0 12px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3);
+  /* Brand palette */
+  --mauve:   #e4c1f9;
+  --cyan:    #188fa7;
+  --cyan-l:  #22adc9;
+  --celadon: #a8f9c3;
+  --pink:    #f0197d;
+  --sandy:   #f4a261;
+
+  /* Surface */
+  --bg:      #1a1828;
+  --bg2:     #120f1e;
+  --surface: rgba(255,255,255,0.06);
+  --border:  rgba(228,193,249,0.22);
+
+  /* Semantic */
+  --accent:  var(--mauve);
+  --ok:      #2ecc71;   /* slightly richer green for ok btn bg */
+  --ko:      var(--pink);
+  --skip-c:  var(--sandy);
+
+  /* Teams */
+  --t1: #f0197d;
+  --t2: #188fa7;
+  --t3: #f4a261;
+
+  --r:  13px;
+  --sh: 0 8px 32px rgba(0,0,0,0.55);
+  --sh-card: 0 16px 48px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3);
 }
+
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
-  color: var(--light);
+  color: #f0eaff;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse at 15% 25%, rgba(212,168,75,0.07) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 75%, rgba(212,168,75,0.05) 0%, transparent 55%),
-    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.008) 40px, rgba(255,255,255,0.008) 41px);
+    radial-gradient(ellipse at 10% 20%, rgba(228,193,249,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(24,143,167,0.07) 0%, transparent 50%),
+    repeating-linear-gradient(45deg,transparent,transparent 44px,rgba(255,255,255,0.007) 44px,rgba(255,255,255,0.007) 45px);
 }
 #app { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ── SCREEN ── */
-.screen {
-  flex: 1; display: flex; flex-direction: column; align-items: center;
-  padding: 1.5rem 1rem 2rem; max-width: 680px; margin: 0 auto; width: 100%; gap: 1rem;
-}
-.screen-wide { max-width: 960px; }
-
-/* ── TYPE ── */
-h1 { font-family: 'Playfair Display', serif; font-weight: 900; color: var(--gold);
-     font-size: clamp(2.8rem, 9vw, 5.5rem); text-align: center; line-height: 1;
-     text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold-l); }
-.subtitle { color: rgba(250,244,225,0.65); text-align: center; font-size: 1rem; }
-
 /* ── LAYOUT ── */
-.stack { display: flex; flex-direction: column; gap: 0.85rem; width: 100%; }
-.row   { display: flex; gap: 0.75rem; width: 100%; align-items: center; }
-.center{ text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-.sep   { width:100%; height:1px; background: rgba(212,168,75,0.18); }
-.top-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; padding: 0 0 0.5rem;
+.screen {
+  flex:1; display:flex; flex-direction:column; align-items:center;
+  padding:1.5rem 1rem 2.5rem; max-width:660px; margin:0 auto; width:100%; gap:1rem;
 }
+.screen-wide { max-width:940px; }
+.stack  { display:flex; flex-direction:column; gap:0.8rem; width:100%; }
+.row    { display:flex; gap:0.7rem; width:100%; align-items:center; }
+.center { text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem; }
+.sep    { width:100%; height:1px; background:var(--border); }
+.top-bar{ display:flex; align-items:center; justify-content:space-between; width:100%; padding-bottom:0.5rem; }
 
-/* ── CARD ── */
-.panel {
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(212,168,75,0.25);
-  border-radius: var(--r); padding: 1rem 1.25rem; width: 100%;
+/* ── TYPOGRAPHY ── */
+h1 {
+  font-family:'Playfair Display',serif; font-weight:900; color:var(--mauve);
+  font-size:clamp(2.8rem,9vw,5.5rem); text-align:center; line-height:1;
+  text-shadow:0 0 40px rgba(228,193,249,0.4);
 }
+h2 { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--mauve); }
+.subtitle { color:rgba(240,234,255,0.55); text-align:center; font-size:0.95rem; }
+
+/* ── WORD CARD ── */
 .word-card {
-  width: 100%; max-width: 380px; aspect-ratio: 3/2;
-  background: var(--cream); color: var(--dark);
-  border-radius: 20px; border: 4px solid var(--gold);
-  box-shadow: var(--sh-card);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; flex-shrink: 0;
+  width:100%; max-width:370px; aspect-ratio:3/2;
+  background:#fdfbff; color:#1a1a2e;
+  border-radius:20px; border:3px solid var(--mauve);
+  box-shadow:var(--sh-card);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  position:relative; overflow:hidden; flex-shrink:0;
 }
 .word-card::before {
-  content: '♦'; position: absolute; top: 12px; left: 14px;
-  color: var(--gold); font-size: 1.1rem; opacity: 0.4;
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(228,193,249,0.12) 0%,transparent 60%);
+  pointer-events:none;
 }
-.word-card::after {
-  content: '♦'; position: absolute; bottom: 12px; right: 14px;
-  color: var(--gold); font-size: 1.1rem; opacity: 0.4; transform: rotate(180deg);
+.word-card .deco {
+  position:absolute; color:var(--mauve); font-size:1rem; opacity:0.4;
 }
+.word-card .deco.tl { top:11px; left:13px; }
+.word-card .deco.br { bottom:11px; right:13px; transform:rotate(180deg); }
 .word-card .word {
-  font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,6vw,2.8rem);
-  font-weight: 700; text-align: center; padding: 1rem 1.5rem; line-height: 1.2;
+  font-family:'Playfair Display',serif; font-size:clamp(1.7rem,5.5vw,2.6rem);
+  font-weight:700; text-align:center; padding:1rem 1.5rem; line-height:1.25; color:#1a1a2e;
 }
 .word-card .deck-label {
-  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-  font-size: 0.68rem; color: rgba(0,0,0,0.35); text-transform: uppercase;
-  letter-spacing: 2px; font-weight: 700; white-space: nowrap;
+  position:absolute; bottom:13px; left:50%; transform:translateX(-50%);
+  font-size:0.65rem; color:rgba(26,26,46,0.4); text-transform:uppercase;
+  letter-spacing:2px; font-weight:700; white-space:nowrap;
 }
-.word-card-back {
-  width: 100%; max-width: 380px; aspect-ratio: 3/2;
-  background: linear-gradient(135deg, var(--felt) 0%, var(--bg2) 100%);
-  border-radius: 20px; border: 4px solid var(--gold);
-  box-shadow: var(--sh-card);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 0.75rem; cursor: pointer; transition: transform 0.2s;
-  background-image: repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(212,168,75,0.04) 8px,rgba(212,168,75,0.04) 9px);
+
+/* ── CARD BACK (mime reveal) ── */
+.card-back {
+  width:100%; max-width:370px; aspect-ratio:3/2;
+  background:linear-gradient(135deg,#231b38,#1a1828);
+  border-radius:20px; border:3px solid var(--mauve);
+  box-shadow:var(--sh-card);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.75rem; cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;
+  background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(228,193,249,0.03) 10px,rgba(228,193,249,0.03) 11px);
 }
-.word-card-back:hover { transform: scale(1.02); }
-.word-card-back .reveal-text {
-  font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold);
-  text-align: center; padding: 0 1.5rem;
+.card-back:hover { transform:scale(1.025); box-shadow:0 20px 60px rgba(0,0,0,0.7); }
+.card-back .reveal-text {
+  font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--mauve);
+  text-align:center; padding:0 1.5rem; line-height:1.5;
+}
+
+/* ── PANEL ── */
+.panel {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r); padding:1rem 1.2rem; width:100%;
+}
+.panel-accent {
+  background:rgba(228,193,249,0.07); border:1px solid rgba(228,193,249,0.3);
+  border-radius:var(--r); padding:1rem 1.2rem; width:100%;
 }
 
 /* ── BUTTONS ── */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
-  padding: 0.7rem 1.4rem; border: none; border-radius: 12px;
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
-  cursor: pointer; transition: all 0.14s ease; text-decoration: none; white-space: nowrap;
+  display:inline-flex; align-items:center; justify-content:center; gap:0.4rem;
+  padding:0.65rem 1.3rem; border:none; border-radius:11px;
+  font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:600;
+  cursor:pointer; transition:all 0.14s; text-decoration:none; white-space:nowrap;
 }
-.btn:active { transform: scale(0.96); }
-.btn-gold    { background: var(--gold); color: var(--dark); }
-.btn-gold:hover { background: var(--gold-l); }
-.btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
-.btn-outline:hover { background: rgba(212,168,75,0.12); }
-.btn-ghost   { background: transparent; color: rgba(250,244,225,0.55); font-size: 0.9rem; }
-.btn-ghost:hover { color: var(--light); }
-.btn-danger  { background: var(--ko); color: white; }
-.btn-danger:hover { background: #e74c3c; }
-.btn-ok  { background: var(--ok); color: white; flex:1; padding:1rem; font-size:1.1rem; border-radius:14px; }
-.btn-ok:hover  { background: #2ecc71; }
-.btn-ko  { background: var(--ko); color: white; flex:1; padding:1rem; font-size:1.1rem; border-radius:14px; }
-.btn-ko:hover  { background: #e74c3c; }
-.btn-skip{ background: rgba(255,255,255,0.12); color: white; border: 2px solid rgba(255,255,255,0.25); flex:1; padding:1rem; font-size:1.1rem; border-radius:14px; }
-.btn-skip:hover{ background: rgba(255,255,255,0.2); }
-.btn-lg  { padding: 1.1rem 2.2rem; font-size: 1.1rem; border-radius: 16px; }
-.btn-full{ width: 100%; }
+.btn:active { transform:scale(0.96); }
+
+.btn-accent  { background:var(--mauve); color:#1a1828; }
+.btn-accent:hover { background:#f0d4ff; }
+.btn-outline { background:transparent; border:2px solid var(--mauve); color:var(--mauve); }
+.btn-outline:hover { background:rgba(228,193,249,0.1); }
+.btn-ghost   { background:transparent; color:rgba(240,234,255,0.5); font-size:0.88rem; }
+.btn-ghost:hover { color:#f0eaff; }
+.btn-danger  { background:var(--pink); color:white; }
+.btn-danger:hover { filter:brightness(1.15); }
+.btn-cyan    { background:var(--cyan); color:white; }
+.btn-cyan:hover { background:var(--cyan-l); }
+
+.btn-ok   { background:var(--celadon); color:#0d2217; flex:1; padding:1rem; font-size:1.05rem; border-radius:13px; }
+.btn-ok:hover  { background:#bcffe0; }
+.btn-ko   { background:var(--pink); color:white; flex:1; padding:1rem; font-size:1.05rem; border-radius:13px; }
+.btn-ko:hover  { filter:brightness(1.1); }
+.btn-skip { background:rgba(244,162,97,0.18); color:var(--sandy); border:2px solid rgba(244,162,97,0.4); flex:1; padding:1rem; font-size:1.05rem; border-radius:13px; }
+.btn-skip:hover{ background:rgba(244,162,97,0.28); }
+
+.btn-lg   { padding:1rem 2rem; font-size:1.05rem; border-radius:14px; }
+.btn-full { width:100%; }
+.btn-icon { padding:0.55rem 0.75rem; border-radius:10px; font-size:1.1rem; }
 
 /* ── TIMER ── */
-.timer-wrap { position: relative; width: 110px; height: 110px; flex-shrink: 0; }
-.timer-svg  { transform: rotate(-90deg); }
-.timer-bg   { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; }
-.timer-arc  { fill: none; stroke: var(--gold); stroke-width: 9; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s; }
+.timer-wrap { position:relative; width:108px; height:108px; flex-shrink:0; }
+.timer-svg  { transform:rotate(-90deg); }
+.timer-bg   { fill:none; stroke:rgba(255,255,255,0.07); stroke-width:9; }
+.timer-arc  { fill:none; stroke:var(--mauve); stroke-width:9; stroke-linecap:round; transition:stroke-dashoffset 1s linear, stroke 0.3s; }
 .timer-num  {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold);
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:900; color:var(--mauve);
 }
 
 /* ── BADGES ── */
-.round-badge {
-  background: rgba(212,168,75,0.15); border: 2px solid var(--gold); color: var(--gold);
-  padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1px;
+.badge {
+  background:rgba(228,193,249,0.12); border:1.5px solid rgba(228,193,249,0.35); color:var(--mauve);
+  padding:0.28rem 0.9rem; border-radius:30px; font-size:0.78rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:1px;
 }
-.score-pill {
-  padding: 0.35rem 0.9rem; border-radius: 30px; font-weight: 700;
-  font-size: 0.9rem; color: white; white-space: nowrap;
-}
-.score-row { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
-.team-banner {
-  display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1.2rem;
-  border-radius: 40px; font-weight: 700; font-size: 1rem; color: white;
+.score-pill { padding:0.32rem 0.85rem; border-radius:30px; font-weight:700; font-size:0.88rem; color:white; white-space:nowrap; }
+.score-row  { display:flex; gap:0.45rem; flex-wrap:wrap; justify-content:center; }
+.team-banner{
+  display:flex; align-items:center; gap:0.65rem; padding:0.55rem 1.1rem;
+  border-radius:40px; font-weight:700; font-size:0.95rem; color:white;
 }
 
 /* ── FORMS ── */
-.form-group { display: flex; flex-direction: column; gap: 0.35rem; width: 100%; }
+.form-group { display:flex; flex-direction:column; gap:0.32rem; width:100%; }
 .form-label {
-  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1.2px; color: var(--gold);
+  font-size:0.75rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:1.2px; color:var(--mauve);
 }
-input[type="text"], textarea, select {
-  background: rgba(255,255,255,0.07); border: 2px solid rgba(255,255,255,0.12);
-  border-radius: 10px; padding: 0.65rem 0.9rem; color: var(--light);
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; width: 100%;
-  transition: border-color 0.2s;
+input[type="text"], textarea, select, input[type="number"] {
+  background:rgba(255,255,255,0.07); border:1.5px solid rgba(255,255,255,0.12);
+  border-radius:10px; padding:0.62rem 0.88rem; color:#f0eaff;
+  font-family:'DM Sans',sans-serif; font-size:0.92rem; width:100%;
+  transition:border-color 0.2s;
 }
-input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
-textarea { resize: vertical; min-height: 100px; }
-select option { background: var(--bg2); }
+input:focus, textarea:focus, select:focus { outline:none; border-color:var(--mauve); }
+textarea { resize:vertical; min-height:96px; }
+select option { background:var(--bg2); }
 .check-row {
-  display: flex; align-items: center; gap: 0.75rem; background: rgba(255,255,255,0.06);
-  border-radius: 10px; padding: 0.7rem 1rem; cursor: pointer; transition: background 0.15s;
+  display:flex; align-items:center; gap:0.7rem; background:var(--surface);
+  border-radius:10px; padding:0.65rem 0.9rem; cursor:pointer; transition:background 0.14s;
 }
-.check-row:hover { background: rgba(255,255,255,0.1); }
-.check-row input[type="checkbox"] { width:18px; height:18px; accent-color: var(--gold); flex-shrink:0; }
-.check-row label { cursor: pointer; font-weight: 500; flex:1; }
+.check-row:hover { background:rgba(255,255,255,0.1); }
+.check-row input[type="checkbox"] { width:17px; height:17px; accent-color:var(--mauve); flex-shrink:0; }
+.check-row label { cursor:pointer; font-weight:500; flex:1; font-size:0.92rem; }
+
+/* ── PLAYER NAMES GRID ── */
+.players-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0.55rem; width:100%;
+}
+.player-input-row {
+  display:flex; align-items:center; gap:0.5rem;
+}
+.player-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 
 /* ── NUM PICKER ── */
-.num-picker { display: flex; align-items: center; gap: 0.75rem; }
+.num-picker { display:flex; align-items:center; gap:0.7rem; }
 .num-picker button {
-  width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--gold);
-  background: transparent; color: var(--gold); font-size: 1.1rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; font-weight: 700;
-  transition: all 0.14s;
+  width:32px; height:32px; border-radius:50%; border:2px solid var(--mauve);
+  background:transparent; color:var(--mauve); font-size:1.05rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; font-weight:700; transition:all 0.14s;
 }
-.num-picker button:hover { background: var(--gold); color: var(--dark); }
+.num-picker button:hover { background:var(--mauve); color:#1a1828; }
 .num-picker .val {
-  font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900;
-  color: var(--gold); min-width: 2rem; text-align: center;
+  font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:900;
+  color:var(--mauve); min-width:2rem; text-align:center;
 }
 
-/* ── DECK LIST ── */
+/* ── DECK ROWS ── */
 .deck-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(212,168,75,0.2);
-  border-radius: var(--r); padding: 0.85rem 1rem; cursor: pointer; transition: all 0.15s;
-  width: 100%;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r); padding:0.8rem 1rem; cursor:pointer; transition:all 0.14s; width:100%;
 }
-.deck-row:hover { background: rgba(255,255,255,0.11); border-color: var(--gold); }
+.deck-row:hover { background:rgba(255,255,255,0.1); border-color:rgba(228,193,249,0.5); }
 
-/* ── PREVIEW GRID ── */
+/* ── PREVIEW ── */
 .prev-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 0.75rem; width: 100%;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(125px,1fr)); gap:0.7rem; width:100%;
 }
 .prev-mini {
-  background: var(--cream); color: var(--dark); border-radius: 10px;
-  border: 2px solid var(--gold); padding: 0.85rem 0.6rem; text-align: center;
-  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.95rem;
-  line-height: 1.3;
+  background:#fdfbff; color:#1a1a2e; border-radius:10px;
+  border:2px solid var(--mauve); padding:0.8rem 0.55rem; text-align:center;
+  font-family:'Playfair Display',serif; font-weight:700; font-size:0.9rem; line-height:1.3;
 }
 
 /* ── SCORE TABLE ── */
-.score-table { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 0.6rem; }
+.score-table { width:100%; max-width:420px; display:flex; flex-direction:column; gap:0.55rem; }
 .score-row-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0.85rem 1.25rem; border-radius: var(--r); color: white;
-  font-size: 1.1rem; font-weight: 700;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0.8rem 1.2rem; border-radius:var(--r); color:white;
+  font-size:1.05rem; font-weight:700;
+}
+
+/* ── SETTINGS MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.7);
+  display:flex; align-items:center; justify-content:center; z-index:100; padding:1rem;
+  backdrop-filter:blur(4px);
+}
+.modal {
+  background:#211c35; border:1.5px solid var(--border);
+  border-radius:20px; padding:1.75rem; width:100%; max-width:400px;
+  display:flex; flex-direction:column; gap:1.1rem;
+  box-shadow:0 24px 80px rgba(0,0,0,0.7);
 }
 
 /* ── ANIMATIONS ── */
-.fade { animation: fadeIn 0.28s ease; }
-@keyframes fadeIn { from {opacity:0;transform:translateY(6px)} to {opacity:1;transform:translateY(0)} }
-.pop { animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1); }
-@keyframes popIn { from {opacity:0;transform:scale(0.7)} to {opacity:1;transform:scale(1)} }
-.flip { animation: flipIn 0.4s ease; }
-@keyframes flipIn { 0%{opacity:0;transform:perspective(600px) rotateY(80deg) scale(0.85)} 100%{opacity:1;transform:perspective(600px) rotateY(0) scale(1)} }
+.fade { animation:fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+.pop  { animation:popIn 0.32s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes popIn  { from{opacity:0;transform:scale(0.65)} to{opacity:1;transform:scale(1)} }
+.flip { animation:flipIn 0.38s ease; }
+@keyframes flipIn { 0%{opacity:0;transform:perspective(600px) rotateY(75deg) scale(0.85)} 100%{opacity:1;transform:perspective(600px) rotateY(0) scale(1)} }
 
 /* ── PRINT ── */
 @media print {
-  body { background: white !important; }
-  .no-print { display: none !important; }
-  #app { display: block; }
+  body { background:white !important; }
+  .no-print { display:none !important; }
+  #app { display:block; }
   .print-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 6px; padding: 8px; width: 100%;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:5px; padding:8px; width:100%;
   }
   .print-card {
-    aspect-ratio: 5/3; border: 2px solid #c9a048; border-radius: 8px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 6px; break-inside: avoid; background: #fdf8ee; color: #1a1a1a;
-    position: relative;
+    aspect-ratio:5/3; border:2px solid #c9a0e0; border-radius:8px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:6px; break-inside:avoid; background:#fdfbff; color:#1a1a2e; position:relative;
   }
-  .print-card::before, .print-card::after {
-    content: '♦'; position: absolute; color: #c9a048; font-size: 9pt; opacity: 0.45;
-  }
-  .print-card::before { top:4px; left:6px; }
-  .print-card::after  { bottom:4px; right:6px; transform:rotate(180deg); }
-  .print-word { font-family:'Playfair Display',serif; font-size: 13pt; font-weight:700; text-align:center; }
-  .print-deck { font-size:6.5pt; color:#aaa; text-transform:uppercase; letter-spacing:1px; margin-top:3px; font-weight:700; }
-  .print-num  { position:absolute; top:4px; right:6px; font-size:6pt; color:#ccc; }
+  .print-word { font-family:'Playfair Display',serif; font-size:12.5pt; font-weight:700; text-align:center; }
+  .print-deck { font-size:6pt; color:#bbb; text-transform:uppercase; letter-spacing:1px; margin-top:3px; font-weight:700; }
+  .print-num  { position:absolute; top:4px; right:6px; font-size:6pt; color:#ddd; }
 }
 .print-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-  padding: 1rem; width: 100%; max-width: 900px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:9px;
+  padding:1rem; width:100%; max-width:900px;
 }
 .print-card {
-  aspect-ratio: 5/3; border: 2px solid var(--gold); border-radius: 10px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 10px; background: var(--cream); color: var(--dark); position: relative;
+  aspect-ratio:5/3; border:2px solid var(--mauve); border-radius:10px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:10px; background:#fdfbff; color:#1a1a2e; position:relative;
 }
-.print-word { font-family:'Playfair Display',serif; font-size:clamp(0.85rem,1.8vw,1.1rem); font-weight:700; text-align:center; line-height:1.2; }
-.print-deck { font-size:0.62rem; color:rgba(0,0,0,0.38); text-transform:uppercase; letter-spacing:1.5px; margin-top:5px; font-weight:700; }
-.print-num  { position:absolute; top:5px; right:7px; font-size:0.6rem; color:rgba(0,0,0,0.2); }
+.print-word { font-family:'Playfair Display',serif; font-size:clamp(0.82rem,1.7vw,1.05rem); font-weight:700; text-align:center; line-height:1.25; }
+.print-deck { font-size:0.6rem; color:rgba(26,26,46,0.38); text-transform:uppercase; letter-spacing:1.5px; margin-top:5px; font-weight:700; }
+.print-num  { position:absolute; top:5px; right:7px; font-size:0.58rem; color:rgba(26,26,46,0.2); }
 </style>
 </head>
 <body>
@@ -272,73 +308,162 @@ select option { background: var(--bg2); }
 
 <script>
 // ══════════════════════════════════════════════════════
-//  CONSTANTS & STATE
+//  CONSTANTS
 // ══════════════════════════════════════════════════════
-const TEAM_COLORS = ['#c0392b','#2471a3','#6c3483'];
-const TEAM_NAMES  = ['Squadra A','Squadra B','Squadra C'];
-const CIRC = 2 * Math.PI * 50;
+const TEAM_COLORS = ['#f0197d','#188fa7','#f4a261'];
+const TEAM_NAMES  = ['Team A','Team B','Team C'];
+const CIRC        = 2 * Math.PI * 50;
+const LS_DECKS    = 'tu_decks';
+const LS_SETTINGS = 'tu_settings';
 
 const $ = id => document.getElementById(id);
-const el = (tag, cls, html) => { const e=document.createElement(tag); if(cls)e.className=cls; if(html)e.innerHTML=html; return e; };
+function div(cls) { const d = document.createElement('div'); d.className = cls; return d; }
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function shuffle(a) {
+  const r = [...a];
+  for (let i = r.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [r[i], r[j]] = [r[j], r[i]];
+  }
+  return r;
+}
 
+// ══════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════
 let S = {
-  decks: JSON.parse(localStorage.getItem('tu_decks') || 'null') || getDefaultDecks(),
-  screen: 'home',
-  setup: null,
+  decks:      JSON.parse(localStorage.getItem(LS_DECKS) || 'null') || getDefaultDecks(),
+  settings:   JSON.parse(localStorage.getItem(LS_SETTINGS) || 'null') || { timer: 30 },
+  screen:     'home',
+  setup:      null,
   printDeckIds: [],
-  printCount: 40,
+  printCount:   40,
+  _editId:      null,
 };
 
-let G = null; // game state
+let G = null;   // game state, null when not playing
 
+function saveDecks()    { localStorage.setItem(LS_DECKS,    JSON.stringify(S.decks)); }
+function saveSettings() { localStorage.setItem(LS_SETTINGS, JSON.stringify(S.settings)); }
+
+function go(screen) { S.screen = screen; render(); window.scrollTo(0, 0); }
+
+// ══════════════════════════════════════════════════════
+//  DEFAULT DECKS
+// ══════════════════════════════════════════════════════
 function getDefaultDecks() {
   return [
-    { id:'d_cinema', name:'🎬 Cinema',
-      words:'Matrix,Titanic,Avatar,Toy Story,Il Padrino,Frozen,Interstellar,Joker,Aladin,Bambi,Jurassic Park,Shrek,Il Re Leone,Cenerentola,Spider-Man,Batman,Superman,E.T.,Grease,Flashdance,Dirty Dancing,Pretty Woman,Forrest Gump,Rain Man,Rocky,Terminator,Ghostbusters,Beetlejuice,Edward mani di forbice,Hook'.split(',') },
-    { id:'d_animali', name:'🐾 Animali',
-      words:'elefante,giraffa,coccodrillo,fenicottero,pinguino,koala,pangolino,platypus,iguana,cobra,anaconda,piranha,picchio,pavone,cicogna,falco,barbagianni,axolotl,capibara,ocelot,ghepardo,ippopotamo,rinoceronte,cammello,lama,alpaca,tapiro,ornitorinco,formichiere,bradipo'.split(',') },
-    { id:'d_famosi', name:'👤 Personaggi Famosi',
-      words:'Leonardo da Vinci,Cleopatra,Napoleone,Einstein,Mozart,Beethoven,Giulio Cesare,Marco Polo,Colombo,Galileo,Darwin,Newton,Shakespeare,Dante,Picasso,Van Gogh,Michelangelo,Raffaello,Platone,Aristotele,Socrate,Alessandro Magno,Giulietta,Romeo,Cenerentola,Pinocchio,Alice,Sherlock Holmes,Robinson Crusoe,Don Chisciotte'.split(',') },
-    { id:'d_oggetti', name:'🏠 Oggetti di Casa',
-      words:'frullatore,lavastoviglie,aspirapolvere,phon,microonde,tostapane,bollitore,ferro da stiro,centrifuga,frigorifero,congelatore,ventilatore,umidificatore,deumidificatore,termosifone,trapano,cacciavite,martello,metro,livella,cazzuola,pennello,scala,carriola,vanga'.split(',') },
+    { id:'d_movies', name:'🎬 Movies',
+      words:'The Matrix,Titanic,Avatar,Toy Story,The Godfather,Frozen,Interstellar,Joker,Aladdin,Bambi,Jurassic Park,Shrek,The Lion King,Cinderella,Spider-Man,Batman,Superman,E.T.,Grease,Dirty Dancing,Pretty Woman,Forrest Gump,Rain Man,Rocky,Terminator,Ghostbusters,Beetlejuice,Edward Scissorhands,Hook,Pinocchio'.split(',') },
+    { id:'d_animals', name:'🐾 Animals',
+      words:'elephant,giraffe,crocodile,flamingo,penguin,koala,pangolin,platypus,iguana,cobra,anaconda,piranha,woodpecker,peacock,stork,falcon,barn owl,axolotl,capybara,ocelot,cheetah,hippopotamus,rhinoceros,camel,llama,alpaca,tapir,armadillo,anteater,sloth'.split(',') },
+    { id:'d_famous', name:'👤 Famous People',
+      words:'Leonardo da Vinci,Cleopatra,Napoleon,Einstein,Mozart,Beethoven,Julius Caesar,Marco Polo,Columbus,Galileo,Darwin,Newton,Shakespeare,Picasso,Van Gogh,Michelangelo,Aristotle,Socrates,Alexander the Great,Marie Curie,Sherlock Holmes,James Bond,Harry Potter,Hermione,Frodo,Gandalf,Dracula,Frankenstein,Romeo,Juliet'.split(',') },
+    { id:'d_objects', name:'🏠 Household Objects',
+      words:'blender,dishwasher,vacuum cleaner,hairdryer,microwave,toaster,kettle,iron,centrifuge,fridge,freezer,fan,humidifier,dehumidifier,radiator,drill,screwdriver,hammer,ruler,level,trowel,paintbrush,ladder,wheelbarrow,shovel,watering can,lawn mower,clothesline,doorbell,smoke detector'.split(',') },
   ];
 }
 
-function saveDecks() { localStorage.setItem('tu_decks', JSON.stringify(S.decks)); }
-function shuffle(a) { const r=[...a]; for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];} return r; }
-function go(screen) { S.screen = screen; render(); window.scrollTo(0,0); }
-
 // ══════════════════════════════════════════════════════
-//  RENDER DISPATCHER
+//  RENDER
 // ══════════════════════════════════════════════════════
 function render() {
   const app = $('app');
   app.innerHTML = '';
+  // Remove any open modals
+  const existing = document.getElementById('settingsModal');
+  if (existing) existing.remove();
   app.appendChild(SCREENS[S.screen]());
 }
 
 // ══════════════════════════════════════════════════════
-//  SCREEN BUILDERS
+//  SETTINGS MODAL
+// ══════════════════════════════════════════════════════
+function openSettings() {
+  const overlay = document.createElement('div');
+  overlay.id = 'settingsModal';
+  overlay.className = 'modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal pop">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <h2 style="font-size:1.3rem">⚙️ Settings</h2>
+        <button class="btn btn-ghost btn-icon" onclick="closeSettings()">✕</button>
+      </div>
+
+      <div class="form-group">
+        <div class="form-label">⏱️ Timer Duration (seconds)</div>
+        <div class="num-picker">
+          <button onclick="adjTimer(-5)">−</button>
+          <span class="val" id="timerVal">${S.settings.timer}</span>
+          <button onclick="adjTimer(5)">+</button>
+        </div>
+        <p style="font-size:0.78rem;opacity:0.45;margin-top:4px">Recommended: 30s for beginners, 60s for advanced</p>
+      </div>
+
+      <div class="sep"></div>
+      <button class="btn btn-accent btn-full" onclick="saveSettingsModal()">Save Settings</button>
+    </div>`;
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeSettings(); });
+  document.body.appendChild(overlay);
+}
+
+function closeSettings() {
+  const m = $('settingsModal');
+  if (m) m.remove();
+}
+
+function adjTimer(d) {
+  S.settings.timer = Math.max(10, Math.min(120, S.settings.timer + d));
+  const el = $('timerVal');
+  if (el) el.textContent = S.settings.timer;
+}
+
+function saveSettingsModal() {
+  saveSettings();
+  closeSettings();
+  // Show a brief toast
+  showToast('Settings saved!');
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = `position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);
+    background:#211c35;border:1.5px solid rgba(228,193,249,0.4);color:var(--mauve);
+    padding:0.6rem 1.4rem;border-radius:30px;font-size:0.88rem;font-weight:600;
+    z-index:200;animation:fadeIn 0.2s ease;pointer-events:none;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5)`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ══════════════════════════════════════════════════════
+//  SCREENS
 // ══════════════════════════════════════════════════════
 const SCREENS = {};
 
 // ── HOME ──────────────────────────────────────────────
 SCREENS.home = () => {
+  const total = S.decks.reduce((s, d) => s + d.words.length, 0);
   const d = div('screen center fade');
-  const totalWords = S.decks.reduce((s,d)=>s+d.words.length,0);
   d.innerHTML = `
-    <div style="margin-top:1.5rem">
-      <div style="font-size:4rem;line-height:1">🎭</div>
-      <h1 style="margin-top:0.5rem">Times Up!</h1>
-      <p class="subtitle" style="margin-top:0.4rem">Descrivi · Mimica · Vinci</p>
+    <div style="position:relative;width:100%;display:flex;justify-content:flex-end;padding:0 0.25rem">
+      <button class="btn btn-ghost btn-icon" onclick="openSettings()" title="Settings">⚙️</button>
     </div>
-    <div class="stack" style="max-width:340px;margin-top:1rem">
-      <button class="btn btn-gold btn-lg btn-full" onclick="go('setup')">🎮 Nuova Partita</button>
-      <button class="btn btn-outline btn-lg btn-full" onclick="go('deckManager')">📚 Gestisci Mazzi</button>
-      <button class="btn btn-outline btn-lg btn-full" onclick="go('printSetup')">🖨️ Stampa Carte</button>
+    <div style="margin-top:0.5rem">
+      <div style="font-size:3.8rem;line-height:1">🎭</div>
+      <h1 style="margin-top:0.4rem">Times Up!</h1>
+      <p class="subtitle" style="margin-top:0.3rem">Describe · Mime · Win</p>
     </div>
-    <p style="opacity:0.35;font-size:0.82rem;margin-top:2rem">
-      ${S.decks.length} mazzi · ${totalWords} parole disponibili
+    <div class="stack" style="max-width:330px;margin-top:1rem">
+      <button class="btn btn-accent btn-lg btn-full" onclick="go('setup')">🎮 New Game</button>
+      <button class="btn btn-outline btn-lg btn-full" onclick="go('deckManager')">📚 Manage Word Lists</button>
+      <button class="btn btn-outline btn-lg btn-full" onclick="go('printSetup')">🖨️ Print Cards</button>
+    </div>
+    <p style="opacity:0.3;font-size:0.78rem;margin-top:1.5rem">
+      ${S.decks.length} decks · ${total} words · Timer: ${S.settings.timer}s
     </p>`;
   return d;
 };
@@ -348,24 +473,28 @@ SCREENS.deckManager = () => {
   const d = div('screen fade');
   let inner = `
     <div class="top-bar">
-      <button class="btn btn-ghost" onclick="go('home')">← Indietro</button>
-      <h2>📚 Mazzi</h2>
-      <button class="btn btn-gold" onclick="deckNew()">+ Nuovo</button>
+      <button class="btn btn-ghost" onclick="go('home')">← Back</button>
+      <h2>📚 Word Lists</h2>
+      <button class="btn btn-accent" onclick="deckNew()">+ New</button>
     </div>`;
   if (!S.decks.length) {
-    inner += `<div class="center" style="margin-top:3rem;opacity:0.5"><div style="font-size:3rem">📦</div><p>Nessun mazzo ancora.<br>Creane uno!</p></div>`;
+    inner += `<div class="center" style="margin-top:3rem;opacity:0.5">
+      <div style="font-size:3rem">📦</div><p>No decks yet.<br>Create your first one!</p></div>`;
   } else {
-    inner += `<div class="stack">` + S.decks.map(dk => `
-      <div class="deck-row" onclick="deckEdit('${dk.id}')">
-        <div>
-          <div style="font-weight:700">${dk.name}</div>
-          <div style="font-size:0.8rem;opacity:0.5;margin-top:2px">${dk.words.length} parole</div>
-        </div>
-        <div style="display:flex;gap:0.5rem">
-          <button class="btn btn-outline" style="padding:0.3rem 0.7rem;font-size:0.8rem" onclick="event.stopPropagation();deckEdit('${dk.id}')">✏️</button>
-          <button class="btn btn-danger" style="padding:0.3rem 0.7rem;font-size:0.8rem" onclick="event.stopPropagation();deckDelete('${dk.id}')">🗑️</button>
-        </div>
-      </div>`).join('') + `</div>`;
+    inner += `<div class="stack">` +
+      S.decks.map(dk => `
+        <div class="deck-row" onclick="deckEdit('${dk.id}')">
+          <div>
+            <div style="font-weight:700">${esc(dk.name)}</div>
+            <div style="font-size:0.78rem;opacity:0.45;margin-top:2px">${dk.words.length} words</div>
+          </div>
+          <div style="display:flex;gap:0.4rem">
+            <button class="btn btn-outline" style="padding:0.28rem 0.65rem;font-size:0.78rem"
+                    onclick="event.stopPropagation();deckEdit('${dk.id}')">✏️</button>
+            <button class="btn btn-danger" style="padding:0.28rem 0.65rem;font-size:0.78rem"
+                    onclick="event.stopPropagation();deckDelete('${dk.id}')">🗑️</button>
+          </div>
+        </div>`).join('') + `</div>`;
   }
   d.innerHTML = inner;
   return d;
@@ -373,28 +502,34 @@ SCREENS.deckManager = () => {
 
 // ── DECK EDIT ─────────────────────────────────────────
 SCREENS.deckEdit = () => {
-  const dk = S._editId ? S.decks.find(d=>d.id===S._editId) : null;
+  const dk = S._editId ? S.decks.find(d => d.id === S._editId) : null;
   const d = div('screen fade');
   d.innerHTML = `
     <div class="top-bar">
-      <button class="btn btn-ghost" onclick="go('deckManager')">← Annulla</button>
-      <h2>${dk ? '✏️ Modifica' : '➕ Nuovo Mazzo'}</h2>
-      <button class="btn btn-gold" onclick="deckSave()">Salva ✓</button>
+      <button class="btn btn-ghost" onclick="go('deckManager')">← Cancel</button>
+      <h2>${dk ? '✏️ Edit Deck' : '➕ New Deck'}</h2>
+      <button class="btn btn-accent" onclick="deckSave()">Save ✓</button>
     </div>
     <div class="stack">
       <div class="form-group">
-        <div class="form-label">Nome del Mazzo</div>
-        <input type="text" id="dkName" placeholder="es. 🎬 Cinema" value="${dk ? esc(dk.name) : ''}">
+        <div class="form-label">Deck Name</div>
+        <input type="text" id="dkName" placeholder="e.g. 🎬 Movies" value="${dk ? esc(dk.name) : ''}">
       </div>
       <div class="form-group">
-        <div class="form-label">Parole <span id="wc" style="opacity:0.5;text-transform:none;letter-spacing:0">${dk ? `(${dk.words.length})` : '(0)'}</span></div>
-        <textarea id="dkWords" placeholder="gatto, cane, elefante, leone, tigre..."
-          oninput="document.getElementById('wc').textContent='('+this.value.split(',').map(w=>w.trim()).filter(w=>w).length+')'">
-${dk ? dk.words.join(', ') : ''}</textarea>
+        <div class="form-label">
+          Words
+          <span id="wc" style="opacity:0.45;text-transform:none;letter-spacing:0;font-weight:500">
+            ${dk ? ` (${dk.words.length})` : ' (0)'}
+          </span>
+        </div>
+        <textarea id="dkWords"
+          placeholder="cat, dog, elephant, lion, tiger..."
+          oninput="document.getElementById('wc').textContent=' ('+this.value.split(',').map(w=>w.trim()).filter(w=>w).length+')'">
+${dk ? esc(dk.words.join(', ')) : ''}</textarea>
       </div>
-      <div class="panel" style="font-size:0.88rem;opacity:0.65;line-height:1.6">
-        💡 <strong>Suggerimento:</strong> inserisci almeno 40 parole per un mazzo completo. 
-        Puoi selezionare più mazzi al setup di gioco per creare un mazzo combinato.
+      <div class="panel" style="font-size:0.86rem;opacity:0.6;line-height:1.7">
+        💡 <strong>Tip:</strong> enter at least 40 words for a full deck.
+        You can combine multiple decks when setting up a game.
       </div>
     </div>`;
   return d;
@@ -404,126 +539,171 @@ ${dk ? dk.words.join(', ') : ''}</textarea>
 SCREENS.setup = () => {
   if (!S.setup) S.setup = {
     deckIds: [], numTeams: 2, numPlayers: 2,
-    teamNames: ['Squadra A','Squadra B','Squadra C'],
+    teamNames: ['Team A', 'Team B', 'Team C'],
+    playerNames: [['',''],['',''],['','']],
     cardCount: 40,
   };
   const st = S.setup;
-  const avail = st.deckIds.reduce((s,id)=>{const dk=S.decks.find(d=>d.id===id);return s+(dk?dk.words.length:0);},0);
+  const avail = st.deckIds.reduce((s, id) => {
+    const dk = S.decks.find(d => d.id === id);
+    return s + (dk ? dk.words.length : 0);
+  }, 0);
+
+  // Build player names section
+  let playerSection = '';
+  for (let t = 0; t < st.numTeams; t++) {
+    playerSection += `
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.35rem">
+        <div style="width:11px;height:11px;border-radius:50%;background:${TEAM_COLORS[t]};flex-shrink:0"></div>
+        <span style="font-weight:600;font-size:0.9rem;color:${TEAM_COLORS[t]}">${esc(st.teamNames[t]||TEAM_NAMES[t])}</span>
+      </div>
+      <div class="players-grid" style="margin-bottom:0.75rem">`;
+    for (let p = 0; p < st.numPlayers; p++) {
+      const val = (st.playerNames[t] && st.playerNames[t][p]) ? esc(st.playerNames[t][p]) : '';
+      playerSection += `
+        <div class="player-input-row">
+          <input type="text" placeholder="Player ${p + 1}"
+                 value="${val}"
+                 oninput="setPlayerName(${t},${p},this.value)"
+                 style="font-size:0.88rem;padding:0.5rem 0.75rem">
+        </div>`;
+    }
+    playerSection += `</div>`;
+  }
 
   const d = div('screen fade');
-  let inner = `
+  d.innerHTML = `
     <div class="top-bar">
-      <button class="btn btn-ghost" onclick="go('home')">← Indietro</button>
-      <h2>⚙️ Setup Gioco</h2>
+      <button class="btn btn-ghost" onclick="go('home')">← Back</button>
+      <h2>⚙️ Game Setup</h2>
     </div>
-    <div class="stack" style="gap:1.4rem">`;
+    <div class="stack" style="gap:1.3rem">
 
-  // Decks
-  inner += `<div class="form-group">
-    <div class="form-label">📚 Mazzi da Usare</div>`;
-  if (!S.decks.length) {
-    inner += `<div class="panel" style="opacity:0.6">Nessun mazzo. <button class="btn btn-outline" style="padding:0.3rem 0.7rem;font-size:0.82rem;margin-left:0.5rem" onclick="go('deckManager')">Crea uno</button></div>`;
-  } else {
-    inner += S.decks.map(dk => `
-      <div class="check-row">
-        <input type="checkbox" id="ck_${dk.id}" ${st.deckIds.includes(dk.id)?'checked':''} onchange="toggleDeck('${dk.id}')">
-        <label for="ck_${dk.id}">${dk.name}</label>
-        <span style="opacity:0.4;font-size:0.8rem">${dk.words.length} p.</span>
-      </div>`).join('');
-  }
-  inner += `</div>`;
+      <div class="form-group">
+        <div class="form-label">📚 Word Lists</div>
+        ${!S.decks.length
+          ? `<div class="panel" style="opacity:0.6;font-size:0.9rem">
+               No decks available.
+               <button class="btn btn-outline" style="padding:0.28rem 0.65rem;font-size:0.8rem;margin-left:0.4rem" onclick="go('deckManager')">Create one</button>
+             </div>`
+          : S.decks.map(dk => `
+              <div class="check-row">
+                <input type="checkbox" id="ck_${dk.id}"
+                       ${st.deckIds.includes(dk.id) ? 'checked' : ''}
+                       onchange="toggleDeck('${dk.id}')">
+                <label for="ck_${dk.id}">${esc(dk.name)}</label>
+                <span style="opacity:0.38;font-size:0.78rem">${dk.words.length}w</span>
+              </div>`).join('')
+        }
+      </div>
 
-  // Card count
-  inner += `<div class="form-group">
-    <div class="form-label">🃏 Carte nel Mazzo</div>
-    <div class="num-picker">
-      <button onclick="adjSetup('cardCount',-5,5,200)">−</button>
-      <span class="val">${st.cardCount}</span>
-      <button onclick="adjSetup('cardCount',5,5,200)">+</button>
-      <span style="font-size:0.8rem;opacity:0.45;margin-left:0.5rem">${avail} disponibili</span>
-    </div>
-  </div>`;
+      <div class="row" style="gap:1.5rem;flex-wrap:wrap">
+        <div class="form-group" style="flex:1;min-width:140px">
+          <div class="form-label">🃏 Cards</div>
+          <div class="num-picker">
+            <button onclick="adjSetup('cardCount',-5,5,300)">−</button>
+            <span class="val">${st.cardCount}</span>
+            <button onclick="adjSetup('cardCount', 5,5,300)">+</button>
+          </div>
+          <span style="font-size:0.72rem;opacity:0.38;margin-top:2px">${avail} available</span>
+        </div>
+        <div class="form-group" style="flex:1;min-width:130px">
+          <div class="form-label">⏱️ Timer</div>
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <div class="badge">${S.settings.timer}s</div>
+            <button class="btn btn-ghost" style="font-size:0.78rem;padding:0.2rem 0.5rem" onclick="openSettings()">change</button>
+          </div>
+        </div>
+      </div>
 
-  // Teams
-  inner += `<div class="form-group">
-    <div class="form-label">👥 Squadre</div>
-    <div class="num-picker">
-      <button onclick="adjSetup('numTeams',-1,2,3)">−</button>
-      <span class="val">${st.numTeams}</span>
-      <button onclick="adjSetup('numTeams',1,2,3)">+</button>
-    </div>
-  </div>`;
+      <div class="sep"></div>
 
-  // Players
-  inner += `<div class="form-group">
-    <div class="form-label">🧑 Giocatori per Squadra</div>
-    <div class="num-picker">
-      <button onclick="adjSetup('numPlayers',-1,1,8)">−</button>
-      <span class="val">${st.numPlayers}</span>
-      <button onclick="adjSetup('numPlayers',1,1,8)">+</button>
-    </div>
-  </div>`;
+      <div class="form-group">
+        <div class="form-label">👥 Teams</div>
+        <div class="num-picker">
+          <button onclick="adjSetup('numTeams',-1,2,3)">−</button>
+          <span class="val">${st.numTeams}</span>
+          <button onclick="adjSetup('numTeams', 1,2,3)">+</button>
+        </div>
+      </div>
 
-  // Team names
-  inner += `<div class="form-group">
-    <div class="form-label">🏷️ Nomi Squadre</div>
-    <div class="stack" style="gap:0.5rem">` +
-    Array.from({length:st.numTeams},(_,i)=>`
-      <div style="display:flex;align-items:center;gap:0.75rem">
-        <div style="width:13px;height:13px;border-radius:50%;background:${TEAM_COLORS[i]};flex-shrink:0"></div>
-        <input type="text" value="${esc(st.teamNames[i]||TEAM_NAMES[i])}" placeholder="${TEAM_NAMES[i]}"
-               oninput="S.setup.teamNames[${i}]=this.value" style="flex:1">
-      </div>`).join('')
-    + `</div></div>`;
+      <div class="form-group">
+        <div class="form-label">🏷️ Team Names</div>
+        <div class="stack" style="gap:0.45rem">
+          ${Array.from({length: st.numTeams}, (_, i) => `
+            <div style="display:flex;align-items:center;gap:0.65rem">
+              <div style="width:12px;height:12px;border-radius:50%;background:${TEAM_COLORS[i]};flex-shrink:0"></div>
+              <input type="text" value="${esc(st.teamNames[i] || TEAM_NAMES[i])}"
+                     placeholder="${TEAM_NAMES[i]}"
+                     oninput="S.setup.teamNames[${i}]=this.value"
+                     style="flex:1;font-size:0.9rem">
+            </div>`).join('')}
+        </div>
+      </div>
 
-  inner += `<button class="btn btn-gold btn-lg btn-full" style="margin-top:0.5rem" onclick="startGame()">
-    🎮 Inizia il Gioco
-  </button></div>`;
+      <div class="form-group">
+        <div class="form-label">🧑 Players per Team</div>
+        <div class="num-picker">
+          <button onclick="adjSetup('numPlayers',-1,1,8)">−</button>
+          <span class="val">${st.numPlayers}</span>
+          <button onclick="adjSetup('numPlayers', 1,1,8)">+</button>
+        </div>
+      </div>
 
-  d.innerHTML = inner;
+      <div class="form-group">
+        <div class="form-label">📝 Player Names <span style="opacity:0.45;text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+        <div style="margin-top:0.2rem">${playerSection}</div>
+      </div>
+
+      <button class="btn btn-accent btn-lg btn-full" style="margin-top:0.5rem" onclick="startGame()">
+        🎮 Start Game
+      </button>
+    </div>`;
   return d;
 };
 
 // ── PREVIEW INTRO ─────────────────────────────────────
 SCREENS.previewIntro = () => {
-  const pv = G.previewQ[G.previewIdx];
+  const pv   = G.previewQ[G.previewIdx];
   const team = G.teams[pv.ti];
   const total = G.previewQ.length;
   const d = div('screen center fade');
   d.innerHTML = `
-    <div style="font-size:3rem;margin-top:1rem">👀</div>
-    <div class="round-badge">Fase Memoria — ${G.previewIdx+1} / ${total}</div>
-    <h2 style="color:${team.color}">${team.name}</h2>
-    <p style="font-size:1.2rem;text-align:center;line-height:1.6">
-      Tocca a <strong>${esc(pv.name)}</strong><br>guardare le sue carte!
+    <div style="font-size:3.2rem;margin-top:1rem">👀</div>
+    <div class="badge">Memory Phase — ${G.previewIdx + 1} / ${total}</div>
+    <h2 style="color:${team.color}">${esc(team.name)}</h2>
+    <p style="font-size:1.15rem;text-align:center;line-height:1.6">
+      It's <strong>${esc(pv.name)}</strong>'s turn<br>to look at their cards!
     </p>
-    <p style="opacity:0.5;font-size:0.9rem;text-align:center">
-      ${total - G.previewIdx - 1 > 0 ? `Dopo ci sono ancora ${total-G.previewIdx-1} giocatori.` : 'Sei l\'ultimo!'}<br>
-      Gli altri devono voltarsi! 🙈
+    <p style="opacity:0.45;font-size:0.88rem;text-align:center">
+      ${total - G.previewIdx - 1 > 0
+        ? `${total - G.previewIdx - 1} player${total-G.previewIdx-1>1?'s':''} still to go.`
+        : "You're the last one!"}
+      <br>Everyone else, look away! 🙈
     </p>
-    <button class="btn btn-gold btn-lg" onclick="go('previewCards')" style="margin-top:0.5rem">
-      Mostra le mie carte 👁️
+    <button class="btn btn-accent btn-lg" onclick="go('previewCards')" style="margin-top:0.5rem">
+      Show my cards 👁️
     </button>`;
   return d;
 };
 
 // ── PREVIEW CARDS ─────────────────────────────────────
 SCREENS.previewCards = () => {
-  const pv = G.previewQ[G.previewIdx];
+  const pv   = G.previewQ[G.previewIdx];
   const team = G.teams[pv.ti];
   const d = div('screen fade');
   d.innerHTML = `
     <div style="text-align:center">
-      <div style="font-size:0.78rem;font-weight:700;color:${team.color};text-transform:uppercase;letter-spacing:1px">
-        ${team.name} · ${esc(pv.name)}
+      <div style="font-size:0.72rem;font-weight:700;color:${team.color};text-transform:uppercase;letter-spacing:1.2px">
+        ${esc(team.name)} · ${esc(pv.name)}
       </div>
-      <p style="font-size:0.82rem;opacity:0.45;margin-top:3px">Memorizza queste parole!</p>
+      <p style="font-size:0.8rem;opacity:0.38;margin-top:3px">Memorise these words!</p>
     </div>
     <div class="prev-grid">
-      ${pv.cards.map(w=>`<div class="prev-mini">${esc(w)}</div>`).join('')}
+      ${pv.cards.map(w => `<div class="prev-mini">${esc(w)}</div>`).join('')}
     </div>
-    <button class="btn btn-gold btn-lg btn-full" onclick="previewDone()">
-      ✓ Ho memorizzato — rimetto le carte
+    <button class="btn btn-accent btn-lg btn-full" onclick="previewDone()">
+      ✓ Done — cards back in the deck
     </button>`;
   return d;
 };
@@ -533,209 +713,218 @@ SCREENS.roundStart = () => {
   const r = G.round;
   const d = div('screen center fade');
   d.innerHTML = `
-    <div class="round-badge">Manche ${r} di 2</div>
-    <div style="font-size:4rem;margin:0.5rem 0">${r===1?'🗣️':'🤫'}</div>
-    <h2 style="font-size:2rem">${r===1?'Descrivi!':'Mimica!'}</h2>
-    <div class="panel" style="max-width:420px;line-height:1.8;font-size:0.92rem;text-align:left">
-      ${r===1?`
-        <p>🗣️ Descrivi la parola senza dirla, senza usare la stessa radice e senza gesti.</p>
-        <p>⏱️ Hai <strong>60 secondi</strong> per far indovinare quante più parole possibili.</p>
-        <p>✅ Indovinata → la carta va alla tua squadra.</p>
-        <p>⏭️ Salta → la carta torna in fondo al mazzo.</p>
-      `:r===2?`
-        <p>🤫 Mimica! Nessun suono, nessuna parola.</p>
-        <p>⏱️ Hai <strong>60 secondi</strong> per il turno.</p>
-        <p>✅ Un solo tentativo per i tuoi compagni — se indovinano, la carta è vostra.</p>
-        <p>❌ Se sbagliano, la carta torna nel mazzo.</p>
-      `:''}
+    <div class="badge">Round ${r} of 2</div>
+    <div style="font-size:3.8rem;margin:0.5rem 0">${r === 1 ? '🗣️' : '🤫'}</div>
+    <h2 style="font-size:1.9rem">${r === 1 ? 'Describe it!' : 'Mime it!'}</h2>
+    <div class="panel" style="max-width:420px;line-height:1.85;font-size:0.9rem;text-align:left">
+      ${r === 1 ? `
+        <p>🗣️ <strong>Describe</strong> the word without saying it, using gestures or words from the same root.</p>
+        <p>⏱️ You have <strong>${S.settings.timer} seconds</strong> to guess as many words as possible.</p>
+        <p>✅ Correct → the card goes to your team.</p>
+        <p>⏭️ Skip → the card goes back to the bottom of the deck.</p>
+      ` : `
+        <p>🤫 <strong>Mime</strong> the word — no speaking, no sounds!</p>
+        <p>⏱️ You have <strong>${S.settings.timer} seconds</strong> for your turn.</p>
+        <p>✅ Your teammates have <strong>one attempt</strong> to guess correctly.</p>
+        <p>❌ If they get it wrong, the card goes back in the deck.</p>
+      `}
     </div>
     <div class="score-row">
-      ${G.teams.map((t,i)=>`<div class="score-pill" style="background:${t.color}">${t.name}: ${G.won[i].length} pt</div>`).join('')}
+      ${G.teams.map((t, i) => `<div class="score-pill" style="background:${t.color}">${esc(t.name)}: ${G.won[i].length} pt</div>`).join('')}
     </div>
-    <div style="font-size:0.85rem;opacity:0.5">${G.deck.length} carte nel mazzo</div>
-    <button class="btn btn-gold btn-lg" onclick="turnStart()">
-      Inizia — ${G.teams[G.ti].name} 🎯
+    <div style="font-size:0.82rem;opacity:0.4">${G.deck.length} cards remaining</div>
+    <button class="btn btn-accent btn-lg" onclick="turnStart()">
+      Start — ${esc(G.teams[G.ti].name)} 🎯
     </button>`;
   return d;
 };
 
 // ── TURN INTRO ────────────────────────────────────────
 SCREENS.turnIntro = () => {
-  const team = G.teams[G.ti];
+  const team  = G.teams[G.ti];
   const player = team.players[team.pi];
   const d = div('screen center fade');
   d.innerHTML = `
     <div style="font-size:3rem">🎴</div>
     <div class="team-banner" style="background:${team.color}">
-      <span style="font-size:1.4rem">${team.name}</span>
+      ${esc(team.name)}
     </div>
-    <p style="font-size:1.2rem;text-align:center">
-      Tocca a <strong>${esc(player)}</strong>
+    <p style="font-size:1.15rem;text-align:center">
+      It's <strong>${esc(player)}</strong>'s turn!
     </p>
-    <p style="opacity:0.5;font-size:0.88rem">
-      ${G.deck.length} carte rimaste nel mazzo
-    </p>
-    <div class="score-row" style="margin-top:0.5rem">
-      ${G.teams.map((t,i)=>`<div class="score-pill" style="background:${t.color}">${t.name}: ${G.won[i].length}</div>`).join('')}
+    <div style="font-size:0.82rem;opacity:0.4">${G.deck.length} cards left</div>
+    <div class="score-row" style="margin-top:0.4rem">
+      ${G.teams.map((t, i) => `<div class="score-pill" style="background:${t.color}">${esc(t.name)}: ${G.won[i].length}</div>`).join('')}
     </div>
-    <button class="btn btn-gold btn-lg" onclick="turnStart()" style="margin-top:0.5rem">
-      ${G.round===1?'🗣️':'🤫'} Via!
+    <button class="btn btn-accent btn-lg" onclick="turnStart()" style="margin-top:0.5rem">
+      ${G.round === 1 ? '🗣️' : '🤫'} Go!
     </button>`;
   return d;
 };
 
 // ── PLAYING ───────────────────────────────────────────
 SCREENS.playing = () => {
-  const team = G.teams[G.ti];
+  const team   = G.teams[G.ti];
   const player = team.players[team.pi];
   const cardsLeft = G.deck.length + (G.cur ? 1 : 0);
-
   const d = div('screen fade');
+
   let inner = `
     <div class="row" style="justify-content:space-between">
-      <div class="team-banner" style="background:${team.color}40;border:2px solid ${team.color};padding:0.45rem 1rem">
-        <span style="color:${team.color};font-size:0.95rem">${team.name}</span>
-        <span style="opacity:0.6;font-size:0.8rem">· ${esc(player)}</span>
+      <div class="team-banner"
+           style="background:${team.color}28;border:1.5px solid ${team.color};padding:0.42rem 1rem">
+        <span style="color:${team.color};font-size:0.9rem">${esc(team.name)}</span>
+        <span style="opacity:0.55;font-size:0.78rem">· ${esc(player)}</span>
       </div>
-      <div class="round-badge">${G.round===1?'🗣️':'🤫'} M${G.round}</div>
+      <div class="badge">${G.round === 1 ? '🗣️' : '🤫'} R${G.round}</div>
     </div>
 
     <div class="score-row">
-      ${G.teams.map((t,i)=>`<div class="score-pill" style="background:${t.color}">${t.name.split(' ').pop()}: ${G.won[i].length}</div>`).join('')}
+      ${G.teams.map((t, i) => `
+        <div class="score-pill" style="background:${t.color}">
+          ${esc(t.name.split(' ').slice(-1)[0])}: ${G.won[i].length}
+        </div>`).join('')}
     </div>
 
     <div class="row" style="justify-content:center;gap:1.5rem">
       <div class="timer-wrap" id="timerWrap">
-        <svg class="timer-svg" width="110" height="110" viewBox="0 0 110 110">
-          <circle class="timer-bg" cx="55" cy="55" r="50"/>
-          <circle class="timer-arc" id="tArc" cx="55" cy="55" r="50"
+        <svg class="timer-svg" width="108" height="108" viewBox="0 0 108 108">
+          <circle class="timer-bg" cx="54" cy="54" r="50"/>
+          <circle class="timer-arc" id="tArc" cx="54" cy="54" r="50"
             stroke-dasharray="${CIRC}"
-            stroke-dashoffset="${(1-G.tLeft/G.tMax)*CIRC}"/>
+            stroke-dashoffset="${(1 - G.tLeft / G.tMax) * CIRC}"/>
         </svg>
-        <div class="timer-num" id="tNum" style="color:${G.tLeft<=10?'#e74c3c':'var(--gold)'}">${G.tLeft}</div>
+        <div class="timer-num" id="tNum"
+             style="color:${G.tLeft <= 5 ? '#f0197d' : G.tLeft <= 10 ? '#f4a261' : 'var(--mauve)'}">
+          ${G.tLeft}
+        </div>
       </div>
-      <div style="font-size:0.85rem;opacity:0.5;text-align:center;line-height:1.8">
-        ${cardsLeft}<br><span style="font-size:0.75rem">carte</span>
+      <div style="font-size:0.82rem;opacity:0.45;text-align:center;line-height:2">
+        ${cardsLeft}<br><span style="font-size:0.72rem">cards left</span>
       </div>
     </div>`;
 
   if (G.cur) {
     if (G.round === 2 && !G.revealed) {
-      // Mime: show back, tap to reveal
       inner += `
-        <div class="word-card-back pop" onclick="revealCard()">
+        <div class="card-back pop" onclick="revealCard()">
           <div style="font-size:2.5rem">🤫</div>
-          <div class="reveal-text">Tappa per vedere la parola<br><small style="opacity:0.6">(altri non guardino!)</small></div>
-        </div>
-        <div class="row" style="opacity:0.4;font-size:0.85rem;justify-content:center;margin-top:0.25rem">
-          Mostra solo al mimico
+          <div class="reveal-text">Tap to see the word<br><small style="opacity:0.55">(others, don't look!)</small></div>
         </div>`;
     } else {
       inner += `
         <div class="word-card flip">
+          <span class="deco tl">♦</span>
+          <span class="deco br">♦</span>
           <div class="word">${esc(G.cur)}</div>
-          <div class="deck-label">${esc(G.curDeck||'')}</div>
+          <div class="deck-label">${esc(G.curDeck || '')}</div>
         </div>
-        <div class="row" style="margin-top:0.5rem">
-          ${G.round===1
-            ? `<button class="btn btn-ok"   onclick="cardOk()">✅ Indovinata!</button>
-               <button class="btn btn-skip" onclick="cardSkip()">⏭️ Salta</button>`
-            : `<button class="btn btn-ok" onclick="cardOk()">✅ Indovinata!</button>
-               <button class="btn btn-ko" onclick="cardWrong()">❌ Sbagliata</button>`}
+        <div class="row" style="margin-top:0.4rem">
+          ${G.round === 1
+            ? `<button class="btn btn-ok"   onclick="cardOk()">✅ Correct!</button>
+               <button class="btn btn-skip" onclick="cardSkip()">⏭️ Skip</button>`
+            : `<button class="btn btn-ok"   onclick="cardOk()">✅ Correct!</button>
+               <button class="btn btn-ko"   onclick="cardWrong()">❌ Wrong</button>`}
         </div>`;
     }
   } else {
-    inner += `<div class="center" style="opacity:0.4;margin:1.5rem 0">
-      <div style="font-size:2.5rem">🃏</div><p>Nessuna carta disponibile</p></div>`;
+    inner += `<div class="center" style="opacity:0.35;margin:1.5rem 0">
+      <div style="font-size:2.5rem">🃏</div><p>No cards available</p></div>`;
   }
 
   inner += `
     <div class="sep"></div>
-    <button class="btn btn-ghost" onclick="turnEndEarly()">Termina turno in anticipo</button>`;
-
+    <button class="btn btn-ghost" onclick="turnEndEarly()">End turn early</button>`;
   d.innerHTML = inner;
   return d;
 };
 
 // ── TURN END ──────────────────────────────────────────
 SCREENS.turnEnd = () => {
-  const team = G.teams[G.ti];
-  const nextTeam = G.teams[(G.ti+1) % G.teams.length];
+  const team     = G.teams[G.ti];
+  const nextTeam = G.teams[(G.ti + 1) % G.teams.length];
   const deckEmpty = G.deck.length === 0;
   const d = div('screen center fade');
   d.innerHTML = `
     <div style="font-size:3rem">⏱️</div>
-    <h2>${deckEmpty ? 'Mazzo esaurito!' : 'Tempo!'}</h2>
-    <p style="opacity:0.7">Fine del turno di <strong style="color:${team.color}">${team.name}</strong></p>
+    <h2>${deckEmpty ? 'Deck empty!' : "Time's up!"}</h2>
+    <p style="opacity:0.65">End of <strong style="color:${team.color}">${esc(team.name)}</strong>'s turn</p>
     <div class="score-row">
-      ${G.teams.map((t,i)=>`<div class="score-pill" style="background:${t.color}">${t.name}: ${G.won[i].length} pt</div>`).join('')}
+      ${G.teams.map((t, i) => `
+        <div class="score-pill" style="background:${t.color}">${esc(t.name)}: ${G.won[i].length} pt</div>`).join('')}
     </div>
     ${deckEmpty
-      ? `<p style="opacity:0.5;font-size:0.9rem">Il mazzo è finito! Fine della manche.</p>
-         <button class="btn btn-gold btn-lg" onclick="endRound()">Risultati →</button>`
-      : `<p style="opacity:0.5;font-size:0.9rem">${G.deck.length} carte rimaste</p>
-         <button class="btn btn-gold btn-lg" onclick="nextTeam()">
-           Tocca a ${nextTeam.name} →
+      ? `<p style="opacity:0.4;font-size:0.88rem">Deck finished — end of round!</p>
+         <button class="btn btn-accent btn-lg" onclick="endRound()">See Results →</button>`
+      : `<p style="opacity:0.4;font-size:0.88rem">${G.deck.length} cards still in the deck</p>
+         <button class="btn btn-accent btn-lg" onclick="nextTeam()">
+           ${esc(nextTeam.name)}'s turn →
          </button>`}`;
   return d;
 };
 
 // ── ROUND END ─────────────────────────────────────────
 SCREENS.roundEnd = () => {
-  const r = G.round;
-  const max = Math.max(...G.won.map(p=>p.length));
+  const r   = G.round;
+  const max = Math.max(...G.won.map(p => p.length));
   const d = div('screen center fade');
   d.innerHTML = `
     <div style="font-size:2.5rem">🏆</div>
-    <div class="round-badge">Fine Manche ${r}</div>
-    <h2 style="font-size:1.8rem">Punteggi</h2>
+    <div class="badge">Round ${r} — Results</div>
+    <h2 style="font-size:1.7rem">Scores</h2>
     <div class="score-table">
-      ${G.teams.map((t,i)=>`
+      ${G.teams.map((t, i) => `
         <div class="score-row-item" style="background:${t.color}">
-          <span>${t.name}</span>
-          <span style="font-size:1.4rem">${G.won[i].length}</span>
-          ${G.won[i].length===max?'<span style="font-size:1.2rem">👑</span>':''}
+          <span>${esc(t.name)}</span>
+          <span style="font-size:1.35rem">${G.won[i].length}</span>
+          ${G.won[i].length === max ? '<span style="font-size:1.1rem">👑</span>' : ''}
         </div>`).join('')}
     </div>
-    ${r===1
-      ? `<p style="opacity:0.65;max-width:360px;text-align:center;font-size:0.9rem;line-height:1.7">
-           Si rimescolano tutte le carte e si gioca con la <strong>mimica</strong>!
-           Stesse parole, stesse squadre.
+    ${r === 1
+      ? `<p style="opacity:0.6;max-width:360px;text-align:center;font-size:0.88rem;line-height:1.75">
+           All cards go back into the deck for Round 2 — <strong>Mime only!</strong>
+           Same words, same teams.
          </p>
-         <button class="btn btn-gold btn-lg" onclick="startRound2()">🤫 Inizia la Mimica!</button>`
-      : `<button class="btn btn-gold btn-lg" onclick="showFinal()">🏆 Risultati Finali</button>`}`;
+         <button class="btn btn-accent btn-lg" onclick="startRound2()">🤫 Start Mime Round!</button>`
+      : `<button class="btn btn-accent btn-lg" onclick="showFinal()">🏆 Final Results</button>`}`;
   return d;
 };
 
 // ── FINAL ─────────────────────────────────────────────
 SCREENS.final = () => {
-  const scores = G.teams.map((t,i)=>({t,i,s:(G.r1Scores?.[i]||0)+G.won[i].length}));
-  scores.sort((a,b)=>b.s-a.s);
+  const scores = G.teams.map((t, i) => ({
+    t, i, s: (G.r1Scores?.[i] || 0) + G.won[i].length
+  }));
+  scores.sort((a, b) => b.s - a.s);
   const winner = scores[0];
   const d = div('screen center fade');
   d.innerHTML = `
     <div style="font-size:3.5rem">🎉</div>
-    <h1 style="font-size:2.5rem">Fine!</h1>
+    <h1 style="font-size:2.4rem">Game Over!</h1>
     <div style="
-      background:${winner.t.color}25; border:3px solid ${winner.t.color};
-      border-radius:20px; padding:1.5rem 2.5rem; text-align:center; margin:0.5rem 0">
-      <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;opacity:0.6;margin-bottom:4px">Vincitore</div>
-      <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:${winner.t.color}">${winner.t.name}</div>
-      <div style="font-size:2.5rem;font-weight:900;color:white;margin-top:2px">${winner.s} pt</div>
+      background:${winner.t.color}20; border:2.5px solid ${winner.t.color};
+      border-radius:20px; padding:1.4rem 2.2rem; text-align:center; margin:0.4rem 0">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;opacity:0.55;margin-bottom:3px">Winner</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:${winner.t.color}">
+        ${esc(winner.t.name)}
+      </div>
+      <div style="font-size:2.3rem;font-weight:900;color:white;margin-top:2px">${winner.s} pts</div>
     </div>
     <div class="score-table" style="max-width:400px">
-      ${scores.slice(1).map(({t,s})=>`
-        <div class="score-row-item" style="background:${t.color}90">
-          <span>${t.name}</span><span>${s} pt</span>
+      ${scores.slice(1).map(({ t, s }) => `
+        <div class="score-row-item" style="background:${t.color}85">
+          <span>${esc(t.name)}</span><span>${s} pts</span>
         </div>`).join('')}
     </div>
     ${G.r1Scores ? `
-      <div class="panel" style="max-width:400px;font-size:0.85rem;opacity:0.6;line-height:1.8">
-        ${G.teams.map((t,i)=>`${t.name}: ${G.r1Scores[i]||0} + ${G.won[i].length} = ${(G.r1Scores[i]||0)+G.won[i].length}`).join(' · ')}
+      <div class="panel" style="max-width:400px;font-size:0.82rem;opacity:0.5;line-height:1.8;text-align:center">
+        ${G.teams.map((t, i) =>
+          `${esc(t.name)}: ${G.r1Scores[i] || 0} + ${G.won[i].length} = ${(G.r1Scores[i]||0)+G.won[i].length}`
+        ).join('  ·  ')}
       </div>` : ''}
     <div class="row" style="flex-wrap:wrap;justify-content:center;margin-top:0.5rem">
-      <button class="btn btn-gold btn-lg"   onclick="go('home')">🏠 Menu</button>
-      <button class="btn btn-outline btn-lg" onclick="playAgain()">🔄 Rivincita!</button>
+      <button class="btn btn-accent btn-lg"  onclick="go('home')">🏠 Home</button>
+      <button class="btn btn-outline btn-lg" onclick="playAgain()">🔄 Play Again!</button>
     </div>`;
   return d;
 };
@@ -745,33 +934,34 @@ SCREENS.printSetup = () => {
   const d = div('screen fade');
   let inner = `
     <div class="top-bar">
-      <button class="btn btn-ghost" onclick="go('home')">← Indietro</button>
-      <h2>🖨️ Stampa Carte</h2>
+      <button class="btn btn-ghost" onclick="go('home')">← Back</button>
+      <h2>🖨️ Print Cards</h2>
     </div>
-    <div class="stack" style="gap:1.4rem">
+    <div class="stack" style="gap:1.3rem">
       <div class="form-group">
-        <div class="form-label">Seleziona Mazzi</div>`;
+        <div class="form-label">Select Decks</div>`;
   if (!S.decks.length) {
-    inner += `<div class="panel" style="opacity:0.6">Nessun mazzo. <button class="btn btn-outline" style="padding:0.3rem 0.7rem;font-size:0.82rem;margin-left:0.5rem" onclick="go('deckManager')">Creane uno</button></div>`;
+    inner += `<div class="panel" style="opacity:0.6">No decks. <button class="btn btn-outline" style="padding:0.28rem 0.65rem;font-size:0.8rem;margin-left:0.4rem" onclick="go('deckManager')">Create one</button></div>`;
   } else {
-    inner += S.decks.map(dk=>`
+    inner += S.decks.map(dk => `
       <div class="check-row">
-        <input type="checkbox" id="pk_${dk.id}" ${S.printDeckIds.includes(dk.id)?'checked':''}
+        <input type="checkbox" id="pk_${dk.id}"
+               ${S.printDeckIds.includes(dk.id) ? 'checked' : ''}
                onchange="togglePrintDeck('${dk.id}')">
-        <label for="pk_${dk.id}">${dk.name}</label>
-        <span style="opacity:0.4;font-size:0.8rem">${dk.words.length} p.</span>
+        <label for="pk_${dk.id}">${esc(dk.name)}</label>
+        <span style="opacity:0.38;font-size:0.78rem">${dk.words.length}w</span>
       </div>`).join('');
   }
   inner += `</div>
       <div class="form-group">
-        <div class="form-label">Numero Carte</div>
+        <div class="form-label">Number of Cards</div>
         <div class="num-picker">
           <button onclick="adjPrint(-10)">−</button>
           <span class="val">${S.printCount}</span>
-          <button onclick="adjPrint(10)">+</button>
+          <button onclick="adjPrint( 10)">+</button>
         </div>
       </div>
-      <button class="btn btn-gold btn-lg btn-full" onclick="go('printPreview')">Anteprima →</button>
+      <button class="btn btn-accent btn-lg btn-full" onclick="go('printPreview')">Preview →</button>
     </div>`;
   d.innerHTML = inner;
   return d;
@@ -780,60 +970,54 @@ SCREENS.printSetup = () => {
 // ── PRINT PREVIEW ─────────────────────────────────────
 SCREENS.printPreview = () => {
   let pool = [];
-  const ids = S.printDeckIds.length ? S.printDeckIds : S.decks.map(d=>d.id);
-  S.decks.filter(dk=>ids.includes(dk.id))
-    .forEach(dk => dk.words.forEach(w=>pool.push({w,dk:dk.name})));
+  const ids = S.printDeckIds.length ? S.printDeckIds : S.decks.map(d => d.id);
+  S.decks.filter(dk => ids.includes(dk.id))
+    .forEach(dk => dk.words.forEach(w => pool.push({ w, dk: dk.name })));
   pool = shuffle(pool).slice(0, S.printCount);
 
   const d = div('fade');
-  let inner = `
+  d.innerHTML = `
     <div class="screen no-print" style="max-width:900px;padding-bottom:0.5rem">
       <div class="top-bar">
-        <button class="btn btn-ghost" onclick="go('printSetup')">← Indietro</button>
-        <h2>🖨️ Anteprima</h2>
-        <button class="btn btn-gold" onclick="window.print()">Stampa 🖨️</button>
+        <button class="btn btn-ghost" onclick="go('printSetup')">← Back</button>
+        <h2>🖨️ Print Preview</h2>
+        <button class="btn btn-accent" onclick="window.print()">Print 🖨️</button>
       </div>
-      <p style="opacity:0.5;font-size:0.82rem;text-align:center;margin-bottom:0.5rem">
-        ${pool.length} carte · 4 per riga · Usa la modalità "Solo sfondo" della stampante per i colori
+      <p style="opacity:0.42;font-size:0.8rem;text-align:center;margin-bottom:0.5rem">
+        ${pool.length} cards · 4 per row · Enable "Print backgrounds" for colours
       </p>
     </div>
     <div class="print-grid">
-      ${pool.map((p,i)=>`
+      ${pool.map((p, i) => `
         <div class="print-card">
-          <div class="print-num">${i+1}</div>
+          <div class="print-num">${i + 1}</div>
           <div class="print-word">${esc(p.w)}</div>
           <div class="print-deck">${esc(p.dk)}</div>
         </div>`).join('')}
     </div>`;
-  d.innerHTML = inner;
   return d;
 };
 
 // ══════════════════════════════════════════════════════
-//  HELPERS
-// ══════════════════════════════════════════════════════
-function div(cls) { const d=document.createElement('div'); d.className=cls; return d; }
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-// ══════════════════════════════════════════════════════
 //  DECK ACTIONS
 // ══════════════════════════════════════════════════════
-function deckNew()       { S._editId=null; go('deckEdit'); }
-function deckEdit(id)    { S._editId=id;   go('deckEdit'); }
-function deckDelete(id)  {
-  if(!confirm('Eliminare questo mazzo?')) return;
-  S.decks = S.decks.filter(d=>d.id!==id); saveDecks(); render();
+function deckNew()    { S._editId = null; go('deckEdit'); }
+function deckEdit(id) { S._editId = id;   go('deckEdit'); }
+function deckDelete(id) {
+  if (!confirm('Delete this deck?')) return;
+  S.decks = S.decks.filter(d => d.id !== id);
+  saveDecks(); render();
 }
 function deckSave() {
-  const name  = ($('dkName').value||'').trim();
-  const words = ($('dkWords').value||'').split(',').map(w=>w.trim()).filter(Boolean);
-  if (!name)         { alert('Inserisci un nome.'); return; }
-  if (!words.length) { alert('Inserisci almeno una parola.'); return; }
+  const name  = ($('dkName').value || '').trim();
+  const words = ($('dkWords').value || '').split(',').map(w => w.trim()).filter(Boolean);
+  if (!name)         { alert('Please enter a deck name.'); return; }
+  if (!words.length) { alert('Please enter at least one word.'); return; }
   if (S._editId) {
-    const dk = S.decks.find(d=>d.id===S._editId);
-    dk.name=name; dk.words=words;
+    const dk = S.decks.find(d => d.id === S._editId);
+    dk.name = name; dk.words = words;
   } else {
-    S.decks.push({ id:'d_'+Date.now(), name, words });
+    S.decks.push({ id: 'd_' + Date.now(), name, words });
   }
   saveDecks(); go('deckManager');
 }
@@ -844,72 +1028,88 @@ function deckSave() {
 function toggleDeck(id) {
   const ids = S.setup.deckIds;
   const i = ids.indexOf(id);
-  if (i>=0) ids.splice(i,1); else ids.push(id);
+  if (i >= 0) ids.splice(i, 1); else ids.push(id);
   render();
 }
-function adjSetup(k,d,mn,mx) {
-  S.setup[k] = Math.max(mn, Math.min(mx, S.setup[k]+d));
+function adjSetup(k, d, mn, mx) {
+  const st = S.setup;
+  st[k] = Math.max(mn, Math.min(mx, st[k] + d));
+  // Resize playerNames arrays if needed
+  if (k === 'numTeams' || k === 'numPlayers') {
+    for (let t = 0; t < 3; t++) {
+      if (!st.playerNames[t]) st.playerNames[t] = [];
+      while (st.playerNames[t].length < st.numPlayers) st.playerNames[t].push('');
+    }
+  }
   render();
+}
+function setPlayerName(ti, pi, val) {
+  if (!S.setup.playerNames[ti]) S.setup.playerNames[ti] = [];
+  S.setup.playerNames[ti][pi] = val;
 }
 function adjPrint(d) {
-  S.printCount = Math.max(10, Math.min(500, S.printCount+d));
-  render();
+  S.printCount = Math.max(10, Math.min(500, S.printCount + d)); render();
 }
 function togglePrintDeck(id) {
   const i = S.printDeckIds.indexOf(id);
-  if (i>=0) S.printDeckIds.splice(i,1); else S.printDeckIds.push(id);
+  if (i >= 0) S.printDeckIds.splice(i, 1); else S.printDeckIds.push(id);
 }
 
 // ══════════════════════════════════════════════════════
-//  GAME START
+//  START GAME
 // ══════════════════════════════════════════════════════
 function startGame() {
   const st = S.setup;
-  if (!st.deckIds.length) { alert('Seleziona almeno un mazzo!'); return; }
+  if (!st.deckIds.length) { alert('Please select at least one deck!'); return; }
 
   // Collect words
   let pool = [];
   st.deckIds.forEach(id => {
-    const dk = S.decks.find(d=>d.id===id);
-    if (dk) dk.words.forEach(w=>pool.push({w,dk:dk.name}));
+    const dk = S.decks.find(d => d.id === id);
+    if (dk) dk.words.forEach(w => pool.push({ w, dk: dk.name }));
   });
-  if (pool.length < 5) { alert('Servono almeno 5 parole.'); return; }
+  if (pool.length < 5) { alert('You need at least 5 words to play!'); return; }
   pool = shuffle(pool).slice(0, st.cardCount);
 
-  // Build teams
-  const teams = Array.from({length:st.numTeams},(_,i)=>({
-    name: st.teamNames[i]||TEAM_NAMES[i],
-    color: TEAM_COLORS[i],
-    players: Array.from({length:st.numPlayers},(_,j)=>`Giocatore ${j+1}`),
+  // Build teams with real player names
+  const teams = Array.from({ length: st.numTeams }, (_, t) => ({
+    name:   st.teamNames[t] || TEAM_NAMES[t],
+    color:  TEAM_COLORS[t],
+    players: Array.from({ length: st.numPlayers }, (_, p) =>
+      (st.playerNames[t] && st.playerNames[t][p] && st.playerNames[t][p].trim())
+        ? st.playerNames[t][p].trim()
+        : `Player ${p + 1}`),
     pi: 0,
   }));
 
-  // Preview distribution
-  const totalP = st.numTeams * st.numPlayers;
-  const sp = shuffle([...pool]);
+  // Distribute cards for memory phase
+  const totalP  = st.numTeams * st.numPlayers;
+  const sp      = shuffle([...pool]);
   const previewQ = [];
   let ci = 0;
-  for (let p=0; p<st.numPlayers; p++) {
-    for (let t=0; t<st.numTeams; t++) {
-      const n = Math.floor(pool.length/totalP) + (ci < pool.length%totalP ? 1 : 0);
-      previewQ.push({ ti:t, name:teams[t].players[p], cards:sp.slice(ci,ci+n).map(o=>o.w) });
+  for (let p = 0; p < st.numPlayers; p++) {
+    for (let t = 0; t < st.numTeams; t++) {
+      const n = Math.floor(pool.length / totalP) + (ci < pool.length % totalP ? 1 : 0);
+      previewQ.push({
+        ti: t,
+        name: teams[t].players[p],
+        cards: sp.slice(ci, ci + n).map(o => o.w),
+      });
       ci += n;
     }
   }
 
-  // deckMap: word → deck name
   const deckMap = {};
-  pool.forEach(o=>{ deckMap[o.w]=o.dk; });
+  pool.forEach(o => { deckMap[o.w] = o.dk; });
 
   G = {
-    teams,
-    allCards: pool.map(o=>o.w),
-    deckMap,
+    teams, deckMap,
+    allCards: pool.map(o => o.w),
     deck: [],
-    won: Array.from({length:st.numTeams},()=>[]),
-    ti: 0,           // current team index
+    won:  Array.from({ length: st.numTeams }, () => []),
+    ti:   0,
     round: 1,
-    tLeft: 60, tMax: 60,
+    tLeft: S.settings.timer, tMax: S.settings.timer,
     tInt: null,
     cur: null, curDeck: null, revealed: false,
     previewQ, previewIdx: 0,
@@ -926,7 +1126,6 @@ function startGame() {
 function previewDone() {
   G.previewIdx++;
   if (G.previewIdx >= G.previewQ.length) {
-    // Start game
     G.deck = shuffle([...G.allCards]);
     go('roundStart');
   } else {
@@ -948,10 +1147,10 @@ function startTimer() {
 
 function updateTimer() {
   const arc = $('tArc'), num = $('tNum');
-  if (!arc||!num) return;
-  const frac = G.tLeft/G.tMax;
-  arc.style.strokeDashoffset = (1-frac)*CIRC;
-  const col = G.tLeft<=10 ? '#e74c3c' : G.tLeft<=20 ? '#e67e22' : 'var(--gold)';
+  if (!arc || !num) return;
+  const frac = G.tLeft / G.tMax;
+  arc.style.strokeDashoffset = (1 - frac) * CIRC;
+  const col = G.tLeft <= 5 ? '#f0197d' : G.tLeft <= 10 ? '#f4a261' : 'var(--mauve)';
   arc.style.stroke = col;
   num.textContent  = G.tLeft;
   num.style.color  = col;
@@ -969,63 +1168,49 @@ function turnStart() {
 
 function nextCard() {
   if (G.deck.length > 0) {
-    G.cur = G.deck.pop();
-    G.curDeck = G.deckMap[G.cur]||'';
+    G.cur      = G.deck.pop();
+    G.curDeck  = G.deckMap[G.cur] || '';
     G.revealed = false;
   } else {
     G.cur = null; G.curDeck = null;
   }
 }
 
-function revealCard() {
-  G.revealed = true;
-  render();
-  updateTimer();
-}
+function revealCard() { G.revealed = true; render(); updateTimer(); }
 
 function cardOk() {
   if (!G.cur) return;
   G.won[G.ti].push(G.cur);
   G.cur = null;
   if (allGuessed()) { clearInterval(G.tInt); endRound(); return; }
-  nextCard();
-  render(); updateTimer();
+  nextCard(); render(); updateTimer();
 }
-
 function cardSkip() {
   if (!G.cur) return;
-  G.deck.unshift(G.cur); // bottom of deck
-  G.cur = null;
-  nextCard();
-  render(); updateTimer();
+  G.deck.unshift(G.cur); G.cur = null;
+  nextCard(); render(); updateTimer();
 }
-
 function cardWrong() {
   if (!G.cur) return;
-  G.deck.unshift(G.cur); // back to deck
-  G.cur = null;
-  nextCard();
-  render(); updateTimer();
+  G.deck.unshift(G.cur); G.cur = null;
+  nextCard(); render(); updateTimer();
 }
 
 function allGuessed() {
-  return G.won.reduce((s,p)=>s+p.length,0) >= G.total;
+  return G.won.reduce((s, p) => s + p.length, 0) >= G.total;
 }
 
 function turnEnd() {
   clearInterval(G.tInt);
-  if (G.cur) { G.deck.unshift(G.cur); G.cur=null; }
+  if (G.cur) { G.deck.unshift(G.cur); G.cur = null; }
   go('turnEnd');
 }
-
 function turnEndEarly() { turnEnd(); }
 
 function nextTeam() {
-  // Advance player for current team
   const t = G.teams[G.ti];
-  t.pi = (t.pi+1) % t.players.length;
-  G.ti = (G.ti+1) % G.teams.length;
-
+  t.pi    = (t.pi + 1) % t.players.length;
+  G.ti    = (G.ti + 1) % G.teams.length;
   if (G.deck.length === 0) { endRound(); return; }
   go('turnIntro');
 }
@@ -1036,21 +1221,16 @@ function nextTeam() {
 function endRound() { go('roundEnd'); }
 
 function startRound2() {
-  G.r1Scores = G.teams.map((_,i)=>G.won[i].length);
-  G.deck = shuffle([...G.allCards]);
-  G.won  = Array.from({length:G.teams.length},()=>[]);
-  G.teams.forEach(t=>t.pi=0);
+  G.r1Scores = G.teams.map((_, i) => G.won[i].length);
+  G.deck     = shuffle([...G.allCards]);
+  G.won      = Array.from({ length: G.teams.length }, () => []);
+  G.teams.forEach(t => t.pi = 0);
   G.ti = 0; G.round = 2;
   go('roundStart');
 }
 
-function showFinal() { go('final'); }
-
-function playAgain() {
-  // Reset game but keep same setup
-  G = null;
-  startGame();
-}
+function showFinal()  { go('final'); }
+function playAgain()  { G = null; startGame(); }
 
 // ══════════════════════════════════════════════════════
 //  INIT
