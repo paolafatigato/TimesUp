@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎭 Times Up! — Preparation Activities</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+/* ══ BASE ══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --mauve:  #e4c1f9;
+  --cyan:   #188fa7;
+  --cel:    #a8f9c3;
+  --pink:   #f0197d;
+  --sandy:  #f4a261;
+
+  --y1:     #f0197d;  /* pink  – year 1 */
+  --y2:     #188fa7;  /* cyan  – year 2 */
+  --y3:     #f4a261;  /* sandy – year 3 */
+
+  --bg:     #17142a;
+  --surface:#211c38;
+  --border: rgba(228,193,249,0.18);
+  --text:   #f0eaff;
+  --muted:  rgba(240,234,255,0.52);
+
+  --r: 14px;
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 5% 15%, rgba(228,193,249,0.07) 0%, transparent 45%),
+    radial-gradient(ellipse at 95% 85%, rgba(24,143,167,0.06) 0%, transparent 45%);
+}
+
+/* ══ HEADER ════════════════════════════════════════════ */
+.site-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--mauve);
+  text-shadow: 0 0 30px rgba(228,193,249,0.3);
+}
+.site-header p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 0.35rem;
+}
+
+/* ══ TABS ══════════════════════════════════════════════ */
+.tab-bar {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem 1rem 0;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  padding: 0.6rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  background: var(--surface);
+  color: var(--muted);
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.y1.active { background: rgba(240,25,125,0.15); border-color: var(--y1); color: var(--y1); }
+.tab-btn.y2.active { background: rgba(24,143,167,0.15); border-color: var(--y2); color: var(--y2); }
+.tab-btn.y3.active { background: rgba(244,162,97,0.15); border-color: var(--y3); color: var(--y3); }
+
+/* ══ TAB PANELS ════════════════════════════════════════ */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ══ WORKSHEET AREA ════════════════════════════════════ */
+.worksheet {
+  max-width: 860px;
+  margin: 1.2rem auto 3rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* ══ ACTIVITY BLOCK ════════════════════════════════════ */
+.activity {
+  background: var(--surface);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.activity-header {
+  padding: 0.85rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.activity-header .act-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.activity-header .act-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.activity-header .act-sub {
+  font-size: 0.78rem;
+  opacity: 0.6;
+  margin-top: 1px;
+}
+.activity-body { padding: 1.25rem 1.4rem; display: flex; flex-direction: column; gap: 1.1rem; }
+
+/* ══ RIDDLE CARDS ══════════════════════════════════════ */
+.riddle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+.riddle-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.riddle-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  opacity: 0.45;
+}
+.riddle-text {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  font-style: italic;
+  opacity: 0.9;
+}
+.answer-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+.answer-line span { font-size: 0.8rem; opacity: 0.55; }
+.answer-line input[type="text"] {
+  flex: 1;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: var(--text);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.answer-line input:focus { border-color: var(--mauve); }
+.answer-line .reveal-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 1rem; opacity: 0.35; transition: opacity 0.15s;
+}
+.answer-line .reveal-btn:hover { opacity: 0.9; }
+.answer-tag {
+  display: none; font-family: 'Patrick Hand', cursive;
+  font-size: 0.95rem; padding: 0.1rem 0.5rem;
+  border-radius: 6px; font-weight: 600;
+}
+
+/* ══ MULTIPLE CHOICE ════════════════════════════════════ */
+.mc-list { display: flex; flex-direction: column; gap: 1rem; }
+.mc-item {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.mc-q {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-bottom: 0.65rem;
+  font-weight: 500;
+}
+.mc-q em { font-style: italic; opacity: 0.8; }
+.mc-opts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+}
+.mc-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: transparent;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text);
+  text-align: left;
+  transition: all 0.14s;
+}
+.mc-opt:hover { background: rgba(255,255,255,0.08); }
+.mc-opt .opt-letter {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+}
+.mc-opt.correct { background: rgba(168,249,195,0.15); border-color: var(--cel); color: var(--cel); }
+.mc-opt.correct .opt-letter { border-color: var(--cel); background: rgba(168,249,195,0.2); }
+.mc-opt.wrong   { background: rgba(240,25,125,0.1); border-color: var(--pink); color: rgba(240,25,125,0.75); }
+.mc-opt.wrong   .opt-letter { border-color: var(--pink); }
+
+/* ══ SCAFFOLDING ════════════════════════════════════════ */
+.scaffold-intro {
+  font-size: 0.88rem; line-height: 1.65; opacity: 0.75;
+  background: rgba(228,193,249,0.07);
+  border-left: 3px solid var(--mauve);
+  padding: 0.75rem 1rem;
+  border-radius: 0 10px 10px 0;
+}
+.scaffold-frames {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.9rem;
+}
+.scaffold-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex; flex-direction: column; gap: 0.55rem;
+}
+.sc-word {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.sc-cant {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  background: rgba(240,25,125,0.12);
+  border-radius: 20px;
+  color: rgba(240,25,125,0.85);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.sc-lines { display: flex; flex-direction: column; gap: 0.45rem; }
+.sc-line {
+  display: flex; align-items: flex-start; gap: 0.4rem;
+  font-size: 0.78rem;
+}
+.sc-line .prompt {
+  color: var(--mauve); font-weight: 600; flex-shrink: 0; margin-top: 1px;
+  opacity: 0.8;
+}
+.sc-line input[type="text"] {
+  flex: 1;
+  border: none;
+  border-bottom: 1.5px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: var(--text);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.9rem;
+  padding: 0.15rem 0.3rem;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+.sc-line input:focus { border-color: var(--mauve); }
+
+/* ══ TOOLBOX ════════════════════════════════════════════ */
+.toolbox {
+  background: rgba(228,193,249,0.06);
+  border: 1px solid rgba(228,193,249,0.2);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.toolbox strong { color: var(--mauve); }
+.phrase-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+.chip {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.78rem;
+  color: var(--cel);
+  font-weight: 500;
+}
+
+/* ══ CONTROLS BAR ══════════════════════════════════════ */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem 1rem;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.6rem 1.3rem; border: none; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: all 0.14s;
+}
+.btn:active { transform: scale(0.96); }
+.btn-mauve   { background: var(--mauve); color: #1a1828; }
+.btn-mauve:hover { background: #f0d4ff; }
+.btn-outline { background: transparent; border: 2px solid var(--mauve); color: var(--mauve); }
+.btn-outline:hover { background: rgba(228,193,249,0.1); }
+.btn-ghost   { background: transparent; border: 2px solid rgba(255,255,255,0.15); color: rgba(240,234,255,0.6); }
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.3); }
+
+/* ══ ANSWER KEY ═════════════════════════════════════════ */
+.answer-key {
+  display: none;
+  background: rgba(168,249,195,0.06);
+  border: 1px solid rgba(168,249,195,0.25);
+  border-radius: var(--r);
+  padding: 1.1rem 1.4rem;
+  margin-top: 0.5rem;
+}
+.answer-key h3 {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--cel); font-weight: 700; margin-bottom: 0.6rem;
+}
+.answer-key ol {
+  list-style: decimal; padding-left: 1.2rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.25rem 1rem;
+}
+.answer-key li { font-family: 'Patrick Hand', cursive; font-size: 0.95rem; opacity: 0.85; }
+.answer-key .mc-answers { display: flex; flex-wrap: wrap; gap: 0.4rem; padding-left: 0; list-style: none; }
+.answer-key .mc-answers li {
+  background: rgba(168,249,195,0.1); border-radius: 20px; padding: 0.15rem 0.7rem;
+  font-size: 0.82rem;
+}
+.answer-key.open { display: block; animation: fadeIn 0.25s ease; }
+
+/* ══ YEAR HEADER ════════════════════════════════════════ */
+.year-header {
+  border-radius: 16px;
+  padding: 1.1rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.year-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 900;
+}
+.year-header .year-sub { font-size: 0.82rem; opacity: 0.7; margin-top: 2px; }
+
+/* ══ MISC ═══════════════════════════════════════════════ */
+.sep { height: 1px; background: var(--border); }
+.fade { animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══ PRINT ══════════════════════════════════════════════ */
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: white !important; color: #111 !important; }
+  .no-print { display: none !important; }
+  .tab-panel { display: none !important; }
+  .tab-panel.print-this { display: block !important; }
+  .site-header h1 { color: #3a1060 !important; text-shadow: none !important; }
+  .site-header p  { color: #666 !important; }
+  .activity { background: #fafafa !important; border: 1.5px solid #ddd !important; break-inside: avoid; }
+  .activity-header { break-inside: avoid; }
+  .riddle-card, .mc-item, .scaffold-card {
+    background: white !important; border: 1.2px solid #ddd !important;
+    break-inside: avoid;
+  }
+  .sc-line input, .answer-line input {
+    border-bottom: 1.5px solid #999 !important; color: #111 !important;
+  }
+  .mc-opt { border-color: #ccc !important; color: #111 !important; }
+  .mc-opt:hover { background: transparent !important; }
+  .toolbox { background: #f5f0ff !important; border-color: #c9a0e0 !important; }
+  .chip { background: #f0f0f0 !important; border-color: #ddd !important; color: #3a6b50 !important; }
+  .scaffold-intro { background: #f5f0ff !important; border-left-color: #c9a0e0 !important; color: #444 !important; }
+  .answer-key { display: none !important; }
+  .year-header { -webkit-print-color-adjust: exact; }
+  .sc-cant { color: #c0106a !important; background: #fee0ef !important; }
+  .worksheet { gap: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="site-header no-print">
+  <h1>🎭 Times Up! — Preparation Activities</h1>
+  <p>Practice describing words before playing · Click 👁️ to reveal an answer · Select your class below</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar no-print">
+  <button class="tab-btn y1 active" onclick="showTab(1)">🌸 Year 1</button>
+  <button class="tab-btn y2"        onclick="showTab(2)">🌊 Year 2</button>
+  <button class="tab-btn y3"        onclick="showTab(3)">🌟 Year 3</button>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls no-print">
+  <button class="btn btn-mauve"   onclick="printCurrent()">🖨️ Print this sheet</button>
+  <button class="btn btn-outline" onclick="clearAll()">🔄 Clear my answers</button>
+  <button class="btn btn-ghost"   id="keyBtn" onclick="toggleKey()">🔑 Show answer key</button>
+  <button class="btn btn-ghost"   onclick="location.href='index.html'">🏠 Open Game</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+      YEAR 1
+══════════════════════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-1">
+<div class="worksheet">
+
+  <!-- Year header -->
+  <div class="year-header" style="background:rgba(240,25,125,0.12);border:2px solid rgba(240,25,125,0.3)">
+    <div style="font-size:2.2rem">🌸</div>
+    <div>
+      <h2 style="color:#f0197d">Year 1 — Can you describe it?</h2>
+      <div class="year-sub">Family · Hobbies · Emotions · Alice in Wonderland</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 1: Riddles -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(240,25,125,0.12)">
+      <div class="act-icon">🕵️</div>
+      <div>
+        <div class="act-title" style="color:#f0197d">Activity 1 — Guess the Word!</div>
+        <div class="act-sub">Read the description. Write the word on the line. Click 👁️ to check!</div>
+      </div>
+    </div>
+    <div class="activity-body">
+      <div class="riddle-grid">
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 1</div>
+          <div class="riddle-text">"She is a family member. She is your mum's or dad's mum. She is usually older. She loves her grandchildren."</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'grandmother')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">grandmother</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 2</div>
+          <div class="riddle-text">"He lives underground. He is always late. He wears a coat and has a big pocket watch. He is white and has long ears."</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'White Rabbit')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">White Rabbit</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 3</div>
+          <div class="riddle-text">"You feel this emotion when your friend has something you don't. You want what they have. It is a negative feeling."</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'jealousy')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">jealousy</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 4</div>
+          <div class="riddle-text">"He wears a very big, strange hat. He always has a tea party. He is a bit crazy and very funny. He is a character in Alice in Wonderland."</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'Mad Hatter')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">Mad Hatter</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 5</div>
+          <div class="riddle-text">"This is an activity. You do it in a pool or the sea. You use your arms and legs. It is great exercise and you get wet!"</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'swimming')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">swimming</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 6</div>
+          <div class="riddle-text">"She is a very angry Queen. She shouts 'Off with their heads!' a lot. She plays a strange sport with flamingos."</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'Red Queen')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">Red Queen</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 7</div>
+          <div class="riddle-text">"You feel this when you do something wrong and everyone is watching you. Your face goes red. You want to hide!"</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'embarrassment')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">embarrassment</span>
+          </div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 8</div>
+          <div class="riddle-text">"He is your parent's brother. He is not your dad, but he is family. His children are your cousins."</div>
+          <div class="answer-line">
+            <span>→</span>
+            <input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'uncle')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">uncle</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /activity 1 -->
+
+  <!-- ACTIVITY 2: Multiple choice -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(240,25,125,0.12)">
+      <div class="act-icon">🎯</div>
+      <div>
+        <div class="act-title" style="color:#f0197d">Activity 2 — Which Description is Correct?</div>
+        <div class="act-sub">Read the description. Circle or click the right answer.</div>
+      </div>
+    </div>
+    <div class="activity-body">
+      <div class="mc-list">
+
+        <div class="mc-item">
+          <div class="mc-q">1. <em>"It is a hobby. You do it outside. You use a bicycle. You go fast on roads or in the countryside."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> skateboarding</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> cycling</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> knitting</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> gardening</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">2. <em>"She is a family member. She is your father's sister. She is not your mother."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> grandmother</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> cousin</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> aunt</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> niece</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">3. <em>"You feel this emotion when you cannot wait. Something exciting is going to happen. You feel lots of energy and happiness."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> sadness</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> boredom</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> excitement</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> loneliness</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">4. <em>"In Alice in Wonderland, Alice falls into this at the beginning of the story."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> a mirror</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> a rabbit hole</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> a mushroom</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> a clock</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">5. <em>"He is a cat in Alice in Wonderland. He can disappear and only his smile is left. He is very mysterious."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> White Rabbit</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> Mad Hatter</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> Cheshire Cat</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> Caterpillar</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">6. <em>"You do this hobby with wool and two long needles. You make jumpers, socks and scarves."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> painting</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> cooking</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> gardening</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">D</span> knitting</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /activity 2 -->
+
+  <!-- ACTIVITY 3: Scaffolding -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(240,25,125,0.12)">
+      <div class="act-icon">🗣️</div>
+      <div>
+        <div class="act-title" style="color:#f0197d">Activity 3 — Now YOU Describe It!</div>
+        <div class="act-sub">Use the frames to describe these words. Remember: don't say the word!</div>
+      </div>
+    </div>
+    <div class="activity-body">
+
+      <div class="toolbox">
+        <strong>🛠️ Useful phrases — use these to describe:</strong>
+        <div class="phrase-chips">
+          <span class="chip">It is a person / animal / thing / feeling</span>
+          <span class="chip">It is in the story of...</span>
+          <span class="chip">You feel it when...</span>
+          <span class="chip">This character...</span>
+          <span class="chip">It is [colour / big / small]</span>
+          <span class="chip">You do this when...</span>
+          <span class="chip">It is the opposite of...</span>
+          <span class="chip">It is related to...</span>
+        </div>
+      </div>
+
+      <div class="scaffold-frames">
+
+        <div class="scaffold-card">
+          <div class="sc-word">👨‍👧 cousin</div>
+          <div class="sc-cant">❌ Don't say: cousin / cugino</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="person / thing..."></div>
+            <div class="sc-line"><span class="prompt">They are...</span><input type="text" placeholder="family? friend?"></div>
+            <div class="sc-line"><span class="prompt">Their parents are your...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">For example...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">😔 boredom</div>
+          <div class="sc-cant">❌ Don't say: bored / boredom / noia</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="feeling / emotion"></div>
+            <div class="sc-line"><span class="prompt">You feel it when...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">It is the opposite of...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">For example...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🎨 painting</div>
+          <div class="sc-cant">❌ Don't say: paint / painting / dipingere</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="hobby / activity"></div>
+            <div class="sc-line"><span class="prompt">You use...</span><input type="text" placeholder="brushes? colours?"></div>
+            <div class="sc-line"><span class="prompt">You do it...</span><input type="text" placeholder="where / when"></div>
+            <div class="sc-line"><span class="prompt">Famous people who did it:</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🃏 playing card</div>
+          <div class="sc-cant">❌ Don't say: card / carta / playing</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="object / thing"></div>
+            <div class="sc-line"><span class="prompt">It appears in...</span><input type="text" placeholder="which story?"></div>
+            <div class="sc-line"><span class="prompt">It is made of...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">You use it to...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">👯 twins</div>
+          <div class="sc-cant">❌ Don't say: twins / gemelli</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">They are...</span><input type="text" placeholder="people / family"></div>
+            <div class="sc-line"><span class="prompt">They look...</span><input type="text" placeholder="the same?"></div>
+            <div class="sc-line"><span class="prompt">They are born...</span><input type="text" placeholder="when?"></div>
+            <div class="sc-line"><span class="prompt">For example...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🍄 mushroom</div>
+          <div class="sc-cant">❌ Don't say: mushroom / fungo</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="food / plant / thing"></div>
+            <div class="sc-line"><span class="prompt">In Alice, it...</span><input type="text" placeholder="what happens?"></div>
+            <div class="sc-line"><span class="prompt">It grows...</span><input type="text" placeholder="where?"></div>
+            <div class="sc-line"><span class="prompt">It looks like...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /activity 3 -->
+
+  <!-- Answer key Y1 -->
+  <div class="answer-key" id="key-1">
+    <h3>🔑 Answer Key — Year 1</h3>
+    <p style="font-size:0.82rem;margin-bottom:0.6rem;opacity:0.7"><strong>Activity 1 — Riddles:</strong></p>
+    <ol><li>grandmother</li><li>White Rabbit</li><li>jealousy</li><li>Mad Hatter</li><li>swimming</li><li>Red Queen</li><li>embarrassment</li><li>uncle</li></ol>
+    <p style="font-size:0.82rem;margin:0.8rem 0 0.4rem;opacity:0.7"><strong>Activity 2 — Multiple Choice:</strong></p>
+    <ul class="mc-answers"><li>1 → B cycling</li><li>2 → C aunt</li><li>3 → C excitement</li><li>4 → B rabbit hole</li><li>5 → C Cheshire Cat</li><li>6 → D knitting</li></ul>
+  </div>
+
+</div><!-- /worksheet y1 -->
+</div><!-- /panel-1 -->
+
+
+<!-- ══════════════════════════════════════════════════════
+      YEAR 2
+══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-2">
+<div class="worksheet">
+
+  <div class="year-header" style="background:rgba(24,143,167,0.12);border:2px solid rgba(24,143,167,0.3)">
+    <div style="font-size:2.2rem">🌊</div>
+    <div>
+      <h2 style="color:#188fa7">Year 2 — Can you describe it?</h2>
+      <div class="year-sub">Food · Clothes · Haitian Revolution · Romeo and Juliet</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 1: Riddles -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(24,143,167,0.12)">
+      <div class="act-icon">🕵️</div>
+      <div>
+        <div class="act-title" style="color:#188fa7">Activity 1 — Guess the Word!</div>
+        <div class="act-sub">Read the description. Write the word on the line. Click 👁️ to check!</div>
+      </div>
+    </div>
+    <div class="activity-body">
+      <div class="riddle-grid">
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 1</div>
+          <div class="riddle-text">"It is a food. It is Italian. It is round and flat. You put cheese, tomato and toppings on it. You cook it in a very hot oven."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'pizza')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">pizza</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 2</div>
+          <div class="riddle-text">"She is a character in a Shakespeare play. She is very young. She falls in love with someone from an enemy family. In the end, she dies."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'Juliet')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">Juliet</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 3</div>
+          <div class="riddle-text">"It is a piece of clothing. You wear it when it rains. It keeps you dry. It often has a hood. It is waterproof."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'raincoat')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">raincoat</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 4</div>
+          <div class="riddle-text">"He was a real person from Haiti. He was born into slavery but became a great leader. He fought for freedom and independence against the French."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'Toussaint Louverture')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">Toussaint Louverture</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 5</div>
+          <div class="riddle-text">"It is a food from Japan. It has rice and often raw fish. You eat it with chopsticks or your hands. It is very popular worldwide."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'sushi')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">sushi</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 6</div>
+          <div class="riddle-text">"He is a religious man in Romeo and Juliet. He helps Romeo and Juliet get married in secret. He makes a plan but it goes very wrong."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'Friar Lawrence')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">Friar Lawrence</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 7</div>
+          <div class="riddle-text">"It is a piece of casual clothing. It is very comfortable. It has a hood. Young people love to wear it. It is usually made of soft material."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'hoodie')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">hoodie</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 8</div>
+          <div class="riddle-text">"This is a big historical event. In 1791, enslaved people in Haiti rose up against their French masters. They fought for their freedom."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'revolt / rebellion')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">revolt / rebellion</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 2: MC -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(24,143,167,0.12)">
+      <div class="act-icon">🎯</div>
+      <div>
+        <div class="act-title" style="color:#188fa7">Activity 2 — Which Description is Correct?</div>
+        <div class="act-sub">Read the description. Circle or click the right answer.</div>
+      </div>
+    </div>
+    <div class="activity-body">
+      <div class="mc-list">
+
+        <div class="mc-item">
+          <div class="mc-q">1. <em>"It is a French food. You eat it for breakfast. It is buttery, golden and crescent-shaped."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> waffle</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> omelette</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> croissant</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> pancake</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">2. <em>"You wear these on your feet in summer. They are open and flat. You wear them at the beach."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> mittens</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> flip flops</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> beanie</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> overalls</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">3. <em>"This is what Romeo and Juliet's two families do. They hate each other and they fight constantly."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> a wedding</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> a feud</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> a masked ball</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> a duel</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">4. <em>"In Haiti, enslaved people worked on these large farms. They grew sugar cane for the French."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> colonies</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> constitutions</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> plantations</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> territories</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">5. <em>"This piece of clothing is very formal and elegant. Men wear it at weddings and important events. It is usually black and white."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> overalls</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> pyjamas</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> beret</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">D</span> tuxedo</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">6. <em>"Romeo and Juliet meet for the first time at this event. Everyone wears a costume and hides their face."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> a duel</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> a wedding</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> a masked ball</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> a funeral</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 3: Scaffolding -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(24,143,167,0.12)">
+      <div class="act-icon">🗣️</div>
+      <div>
+        <div class="act-title" style="color:#188fa7">Activity 3 — Now YOU Describe It!</div>
+        <div class="act-sub">Use the frames to describe these words. Remember: don't say the word!</div>
+      </div>
+    </div>
+    <div class="activity-body">
+
+      <div class="toolbox">
+        <strong>🛠️ Useful phrases — use these to describe:</strong>
+        <div class="phrase-chips">
+          <span class="chip">It is a food / piece of clothing</span>
+          <span class="chip">It comes from [country]</span>
+          <span class="chip">You eat it with... / You wear it when...</span>
+          <span class="chip">This person lived in...</span>
+          <span class="chip">In the play / story, this character...</span>
+          <span class="chip">It is [colour / material / shape]</span>
+          <span class="chip">It is related to [history / fashion / food]</span>
+          <span class="chip">He/She fought for...</span>
+        </div>
+      </div>
+
+      <div class="scaffold-frames">
+
+        <div class="scaffold-card">
+          <div class="sc-word">🍔 burger</div>
+          <div class="sc-cant">❌ Don't say: burger / hamburger</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="food / dish"></div>
+            <div class="sc-line"><span class="prompt">It comes from...</span><input type="text" placeholder="which country?"></div>
+            <div class="sc-line"><span class="prompt">It is made of...</span><input type="text" placeholder="ingredients"></div>
+            <div class="sc-line"><span class="prompt">You eat it...</span><input type="text" placeholder="where / how"></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🧥 leather jacket</div>
+          <div class="sc-cant">❌ Don't say: leather / jacket / giubbotto</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="piece of clothing"></div>
+            <div class="sc-line"><span class="prompt">It is made of...</span><input type="text" placeholder="material"></div>
+            <div class="sc-line"><span class="prompt">People wear it...</span><input type="text" placeholder="when / where"></div>
+            <div class="sc-line"><span class="prompt">Famous people who wear it:</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">⚔️ duel</div>
+          <div class="sc-cant">❌ Don't say: duel / duello / fight</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is...</span><input type="text" placeholder="an event / a fight"></div>
+            <div class="sc-line"><span class="prompt">Two people...</span><input type="text" placeholder="what do they do?"></div>
+            <div class="sc-line"><span class="prompt">In Romeo and Juliet...</span><input type="text" placeholder="who duels?"></div>
+            <div class="sc-line"><span class="prompt">It is...</span><input type="text" placeholder="dangerous / historical"></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">⛓️ slavery</div>
+          <div class="sc-cant">❌ Don't say: slavery / slave / schiavitù</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is...</span><input type="text" placeholder="a historical thing"></div>
+            <div class="sc-line"><span class="prompt">People were...</span><input type="text" placeholder="forced to work?"></div>
+            <div class="sc-line"><span class="prompt">It happened in...</span><input type="text" placeholder="where / when"></div>
+            <div class="sc-line"><span class="prompt">It was...</span><input type="text" placeholder="wrong / illegal now"></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🎭 Capulet</div>
+          <div class="sc-cant">❌ Don't say: Capulet / Capuleti</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="name / family"></div>
+            <div class="sc-line"><span class="prompt">In Romeo and Juliet, they...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">Their enemy is...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">Juliet is a...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🥞 pancakes</div>
+          <div class="sc-cant">❌ Don't say: pancake / crepe / frittella</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">They are a...</span><input type="text" placeholder="food / dish"></div>
+            <div class="sc-line"><span class="prompt">They are flat and...</span><input type="text" placeholder="round / thin"></div>
+            <div class="sc-line"><span class="prompt">You eat them with...</span><input type="text" placeholder="syrup? fruit?"></div>
+            <div class="sc-line"><span class="prompt">You eat them for...</span><input type="text" placeholder="breakfast / dessert"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer key Y2 -->
+  <div class="answer-key" id="key-2">
+    <h3>🔑 Answer Key — Year 2</h3>
+    <p style="font-size:0.82rem;margin-bottom:0.6rem;opacity:0.7"><strong>Activity 1 — Riddles:</strong></p>
+    <ol><li>pizza</li><li>Juliet</li><li>raincoat</li><li>Toussaint Louverture</li><li>sushi</li><li>Friar Lawrence</li><li>hoodie</li><li>revolt / rebellion</li></ol>
+    <p style="font-size:0.82rem;margin:0.8rem 0 0.4rem;opacity:0.7"><strong>Activity 2 — Multiple Choice:</strong></p>
+    <ul class="mc-answers"><li>1 → C croissant</li><li>2 → B flip flops</li><li>3 → B a feud</li><li>4 → C plantations</li><li>5 → D tuxedo</li><li>6 → C masked ball</li></ul>
+  </div>
+
+</div><!-- /worksheet y2 -->
+</div><!-- /panel-2 -->
+
+
+<!-- ══════════════════════════════════════════════════════
+      YEAR 3
+══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-3">
+<div class="worksheet">
+
+  <div class="year-header" style="background:rgba(244,162,97,0.12);border:2px solid rgba(244,162,97,0.3)">
+    <div style="font-size:2.2rem">🌟</div>
+    <div>
+      <h2 style="color:#f4a261">Year 3 — Can you describe it?</h2>
+      <div class="year-sub">Jobs · 1984 / Orwell · Macbeth · Music · Linguistic Relativity</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 1: Riddles -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(244,162,97,0.12)">
+      <div class="act-icon">🕵️</div>
+      <div>
+        <div class="act-title" style="color:#f4a261">Activity 1 — Guess the Word!</div>
+        <div class="act-sub">Read the description. Write the word on the line. Click 👁️ to check!</div>
+      </div>
+    </div>
+    <div class="activity-body">
+      <div class="riddle-grid">
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 1</div>
+          <div class="riddle-text">"This person works in a hospital. They do operations to save people's lives. They need many years of study. They wear a mask in the operating room."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'surgeon')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">surgeon</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 2</div>
+          <div class="riddle-text">"This is a famous novel by George Orwell. It is set in the future. Someone called Big Brother watches everyone. The people have no freedom."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'1984')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">1984</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 3</div>
+          <div class="riddle-text">"This instrument has six strings. You can play rock, blues or pop with it. Jimi Hendrix and Kurt Cobain were very famous for playing it."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'guitar')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">guitar</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 4</div>
+          <div class="riddle-text">"This animal appears in Animal Farm. It is pink. It makes a loud oink sound. Napoleon and Snowball are both this type of animal."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'pig')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">pig</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 5</div>
+          <div class="riddle-text">"She appears in Macbeth. She has magic powers. She makes dark predictions about the future. She is mysterious and dangerous."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'witch')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">witch</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 6</div>
+          <div class="riddle-text">"This person makes food in a restaurant or hotel. They wear a white uniform and sometimes a tall white hat. Gordon Ramsay is a very famous one."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'chef')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">chef</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 7</div>
+          <div class="riddle-text">"This is a language in Orwell's 1984. The government invented it. It has fewer and fewer words every year. The goal is to make independent thought impossible."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'Newspeak')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">Newspeak</span></div>
+        </div>
+
+        <div class="riddle-card">
+          <div class="riddle-num">Clue 8</div>
+          <div class="riddle-text">"This person flies aeroplanes. They carry passengers from one country to another. They wear a uniform and a hat. They speak to the control tower by radio."</div>
+          <div class="answer-line"><span>→</span><input type="text" placeholder="your answer...">
+            <button class="reveal-btn" onclick="reveal(this,'pilot')">👁️</button>
+            <span class="answer-tag" style="color:var(--cel);background:rgba(168,249,195,0.12)">pilot</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 2: MC -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(244,162,97,0.12)">
+      <div class="act-icon">🎯</div>
+      <div>
+        <div class="act-title" style="color:#f4a261">Activity 2 — Which Description is Correct?</div>
+        <div class="act-sub">Read the description. Circle or click the right answer.</div>
+      </div>
+    </div>
+    <div class="activity-body">
+      <div class="mc-list">
+
+        <div class="mc-item">
+          <div class="mc-q">1. <em>"This person fixes the water pipes in your house when they are broken."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> builder</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> electrician</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> plumber</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> postman</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">2. <em>"In 1984, this is the secret police. They arrest people for having bad thoughts about the government."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> Animal Farm</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> Thought Police</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> Newspeak</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> Room 101</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">3. <em>"You play this instrument by hitting it. It keeps the rhythm. Rock and jazz bands always have one."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> violin</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> drum</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> trumpet</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> piano</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">4. <em>"In Animal Farm, this animal is very strong and works very hard. He always says 'I will work harder.' He represents the working class."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> pig</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> crow</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> sheep</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">D</span> horse</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">5. <em>"In Macbeth, this is what Macbeth sees floating in front of him before he kills the king. It is not real."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> a crown</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">B</span> a dagger</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">C</span> a ghost</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> a cauldron</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">6. <em>"This person writes music and the words to songs. Taylor Swift and Ed Sheeran are famous examples."</em></div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">A</span> rapper</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">B</span> DJ</button>
+            <button class="mc-opt" onclick="mcClick(this,true)"><span class="opt-letter">C</span> songwriter</button>
+            <button class="mc-opt" onclick="mcClick(this,false)"><span class="opt-letter">D</span> conductor</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 3: Scaffolding -->
+  <div class="activity">
+    <div class="activity-header" style="background:rgba(244,162,97,0.12)">
+      <div class="act-icon">🗣️</div>
+      <div>
+        <div class="act-title" style="color:#f4a261">Activity 3 — Now YOU Describe It!</div>
+        <div class="act-sub">Use the frames to describe these words. Remember: don't say the word!</div>
+      </div>
+    </div>
+    <div class="activity-body">
+
+      <div class="toolbox">
+        <strong>🛠️ Useful phrases — use these to describe:</strong>
+        <div class="phrase-chips">
+          <span class="chip">This person works...</span>
+          <span class="chip">This is a book / play / idea / instrument</span>
+          <span class="chip">In the story, this character...</span>
+          <span class="chip">George Orwell / Shakespeare wrote...</span>
+          <span class="chip">Musicians use this to...</span>
+          <span class="chip">It represents / symbolises...</span>
+          <span class="chip">This animal is in the story of...</span>
+          <span class="chip">It is the idea that...</span>
+        </div>
+      </div>
+
+      <div class="scaffold-frames">
+
+        <div class="scaffold-card">
+          <div class="sc-word">🚒 firefighter</div>
+          <div class="sc-cant">❌ Don't say: fire / firefighter / pompiere</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">This person works...</span><input type="text" placeholder="where?"></div>
+            <div class="sc-line"><span class="prompt">They help people when...</span><input type="text" placeholder=""></div>
+            <div class="sc-line"><span class="prompt">They wear...</span><input type="text" placeholder="what uniform?"></div>
+            <div class="sc-line"><span class="prompt">They use a...</span><input type="text" placeholder="hose? ladder?"></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">👻 ghost</div>
+          <div class="sc-cant">❌ Don't say: ghost / fantasma</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is the spirit of...</span><input type="text" placeholder="a dead person?"></div>
+            <div class="sc-line"><span class="prompt">In Macbeth, the ghost of...</span><input type="text" placeholder="who?"></div>
+            <div class="sc-line"><span class="prompt">It is...</span><input type="text" placeholder="visible? scary?"></div>
+            <div class="sc-line"><span class="prompt">Only Macbeth can...</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🎵 album</div>
+          <div class="sc-cant">❌ Don't say: album / disco / record</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="music collection"></div>
+            <div class="sc-line"><span class="prompt">It has many...</span><input type="text" placeholder="songs / tracks"></div>
+            <div class="sc-line"><span class="prompt">A singer or band...</span><input type="text" placeholder="releases / makes it"></div>
+            <div class="sc-line"><span class="prompt">Famous example:</span><input type="text" placeholder=""></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🐑 sheep</div>
+          <div class="sc-cant">❌ Don't say: sheep / pecora</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is an animal. It...</span><input type="text" placeholder="lives on a farm"></div>
+            <div class="sc-line"><span class="prompt">It is white and has...</span><input type="text" placeholder="wool?"></div>
+            <div class="sc-line"><span class="prompt">In Animal Farm, they...</span><input type="text" placeholder="repeat slogans"></div>
+            <div class="sc-line"><span class="prompt">The sound it makes is...</span><input type="text" placeholder="baa!"></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🎹 piano</div>
+          <div class="sc-cant">❌ Don't say: piano / pianoforte</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a musical...</span><input type="text" placeholder="instrument"></div>
+            <div class="sc-line"><span class="prompt">It has black and white...</span><input type="text" placeholder="keys"></div>
+            <div class="sc-line"><span class="prompt">You play it with...</span><input type="text" placeholder="your fingers"></div>
+            <div class="sc-line"><span class="prompt">Famous pianists:</span><input type="text" placeholder="Mozart? Beethoven?"></div>
+          </div>
+        </div>
+
+        <div class="scaffold-card">
+          <div class="sc-word">🏰 castle</div>
+          <div class="sc-cant">❌ Don't say: castle / castello</div>
+          <div class="sc-lines">
+            <div class="sc-line"><span class="prompt">It is a...</span><input type="text" placeholder="building / place"></div>
+            <div class="sc-line"><span class="prompt">Kings and queens lived...</span><input type="text" placeholder="there / inside it"></div>
+            <div class="sc-line"><span class="prompt">In Macbeth, the castle is in...</span><input type="text" placeholder="Scotland"></div>
+            <div class="sc-line"><span class="prompt">It has...</span><input type="text" placeholder="towers? walls?"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer key Y3 -->
+  <div class="answer-key" id="key-3">
+    <h3>🔑 Answer Key — Year 3</h3>
+    <p style="font-size:0.82rem;margin-bottom:0.6rem;opacity:0.7"><strong>Activity 1 — Riddles:</strong></p>
+    <ol><li>surgeon</li><li>1984</li><li>guitar</li><li>pig</li><li>witch</li><li>chef</li><li>Newspeak</li><li>pilot</li></ol>
+    <p style="font-size:0.82rem;margin:0.8rem 0 0.4rem;opacity:0.7"><strong>Activity 2 — Multiple Choice:</strong></p>
+    <ul class="mc-answers"><li>1 → C plumber</li><li>2 → B Thought Police</li><li>3 → B drum</li><li>4 → D horse</li><li>5 → B dagger</li><li>6 → C songwriter</li></ul>
+  </div>
+
+</div><!-- /worksheet y3 -->
+</div><!-- /panel-3 -->
+
+<div style="height:2rem"></div>
+
+<!-- ══════════════════════════════════════════════════════
+      JAVASCRIPT
+══════════════════════════════════════════════════════ -->
+<script>
+let currentTab = 1;
+let keyOpen    = false;
+
+function showTab(n) {
+  currentTab = n;
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.tab-btn')[n - 1].classList.add('active');
+  // close key when switching
+  keyOpen = false;
+  updateKeyBtn();
+  const key = document.getElementById('key-' + n);
+  if (key) key.classList.remove('open');
+}
+
+function reveal(btn, answer) {
+  const tag = btn.nextElementSibling;
+  tag.style.display = tag.style.display === 'inline-flex' ? 'none' : 'inline-flex';
+  btn.textContent   = tag.style.display === 'none' ? '👁️' : '🙈';
+}
+
+function mcClick(btn, correct) {
+  const group = btn.closest('.mc-opts');
+  // If already answered, reset
+  const alreadyAnswered = [...group.querySelectorAll('.mc-opt')].some(b => b.classList.contains('correct') || b.classList.contains('wrong'));
+  if (alreadyAnswered) {
+    group.querySelectorAll('.mc-opt').forEach(b => { b.classList.remove('correct','wrong'); });
+    return;
+  }
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (correct) {
+    btn.querySelector('.opt-letter').textContent = '✓';
+  } else {
+    btn.querySelector('.opt-letter').textContent = '✗';
+    // Show correct one
+    [...group.querySelectorAll('.mc-opt')].forEach(b => {
+      if (b._correct) {
+        b.classList.add('correct');
+        b.querySelector('.opt-letter').textContent = '✓';
+      }
+    });
+  }
+}
+
+// Pre-mark correct answers on buttons
+document.querySelectorAll('.mc-opt').forEach(btn => {
+  // We infer correct from onclick attribute
+  const attr = btn.getAttribute('onclick') || '';
+  btn._correct = attr.includes('true');
+});
+
+function toggleKey() {
+  keyOpen = !keyOpen;
+  const key = document.getElementById('key-' + currentTab);
+  if (key) {
+    if (keyOpen) key.classList.add('open'); else key.classList.remove('open');
+  }
+  updateKeyBtn();
+}
+
+function updateKeyBtn() {
+  const b = document.getElementById('keyBtn');
+  if (b) b.textContent = keyOpen ? '🔒 Hide answer key' : '🔑 Show answer key';
+}
+
+function clearAll() {
+  if (!confirm('Clear all your answers for this sheet?')) return;
+  const panel = document.getElementById('panel-' + currentTab);
+  panel.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+  panel.querySelectorAll('.mc-opt').forEach(b => {
+    b.classList.remove('correct','wrong');
+    b.querySelector('.opt-letter').textContent = b.getAttribute('onclick').includes('true') ? b.querySelector('.opt-letter').textContent : b.querySelector('.opt-letter').textContent;
+  });
+  // Reset opt letters
+  panel.querySelectorAll('.mc-opts').forEach(group => {
+    const letters = ['A','B','C','D'];
+    group.querySelectorAll('.mc-opt').forEach((b,i) => {
+      b.classList.remove('correct','wrong');
+      b.querySelector('.opt-letter').textContent = letters[i];
+    });
+  });
+  panel.querySelectorAll('.answer-tag').forEach(t => t.style.display = 'none');
+  panel.querySelectorAll('.reveal-btn').forEach(b => b.textContent = '👁️');
+}
+
+function printCurrent() {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('print-this'));
+  const panel = document.getElementById('panel-' + currentTab);
+  panel.classList.add('print-this');
+  window.print();
+}
+</script>
+</body>
+</html>
